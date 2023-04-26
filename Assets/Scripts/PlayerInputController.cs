@@ -10,8 +10,9 @@ public class PlayerInputController : MonoBehaviour
     public float joystickMaxSpeed = 6f;
     
     private CharacterController characterController;
-    // private PlayerWeaponController playerWeaponController; 
+    private PlayerWeaponController playerWeaponController; 
     public VariableJoystick variableJoystick;
+    public AttackButton attackButton;
 
     private void Start()
     {
@@ -25,13 +26,13 @@ public class PlayerInputController : MonoBehaviour
         }
 
         characterController = GetComponentInChildren<CharacterController>();
-/*         playerWeaponController = GetComponentInChildren<PlayerWeaponController>();  */
+        playerWeaponController = GetComponentInChildren<PlayerWeaponController>();  
     }
 
     private void Update()
     {
 /*      
-        // PC INPUT
+        // PC INPUTS.
         // Get the current input states.
         var horizontalInput = Input.GetAxisRaw("Horizontal");
         var jump = Input.GetButtonDown("Jump");
@@ -41,21 +42,20 @@ public class PlayerInputController : MonoBehaviour
 
         var horizontalInput = variableJoystick.Horizontal;
         var jump = variableJoystick.Vertical > 0.5f;
-        //var attack = variableJoystick.Horizontal > 0.5f;
+        var attack = attackButton.Status;
 
-        InputChanged = (horizontalInput != HorizontalInput || jump != Jump  /* || attack != Attack */);
+        InputChanged = (horizontalInput != HorizontalInput || jump != Jump   || attack != Attack );
 
         HorizontalInput = horizontalInput;
         Jump = jump;
-        //Attack = attack;
+        Attack = attack;
 
         characterController.SetMoveVector(HorizontalInput * joystickMaxSpeed);
         characterController.SetJump(Jump);
-/*         // Set inputs on Player Controllers.
         
         if (attack)
         {
             playerWeaponController.Attack();
-        } */
+        } 
     }
 }

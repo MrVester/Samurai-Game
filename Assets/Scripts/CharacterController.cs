@@ -4,25 +4,22 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
-    public VariableJoystick variableJoystick;
-    public bool isJoystickControl = false;
     private LayerMask platformLayerMask;
     private Rigidbody2D rb;
-    public Vector2 moveVector;
-    public float joystickMaxSpeed = 6f;
-    public float defaultSpeed = 1f;
-    private float speed;
-    public float accSpeed = 1.5f;
-    public float JumpForce = 5f;
 
-    private bool Switch = true;
     private CapsuleCollider2D capsuleCollider2D;
     private Animator animator;
     private bool FacingRight = true;
-    private bool isFacingRight = true;
     private bool isCharacterCanWalk = true;
+    [Header("Movement")]
+    public float moveVector;
+    public float defaultSpeed = 1f;
+    private float speed;
 
+    [Header("Jumping")]
+    public ParticleSystem LandParticles;
     private bool jump;
+    public float JumpForce = 5f;
 
     public bool IsCharacterCanWalk
     {
@@ -79,7 +76,7 @@ public class CharacterController : MonoBehaviour
 
     public void SetMoveVector(float value)
     {
-        moveVector.x = value;
+        moveVector = value;
     }
 
     public void SetJump(bool value)
@@ -89,26 +86,12 @@ public class CharacterController : MonoBehaviour
 
     void Walk()
     {
-        rb.velocity = new Vector2(moveVector.x, rb.velocity.y);
-
-        if (Input.GetKey(KeyCode.LeftShift) && Switch && Mathf.Abs(rb.velocity.x) > 0 && isOnGroundLeft())
-        {
-
-            speed = accSpeed;
-            Switch = false;
-        }
-
-        if (rb.velocity.x == 0 && !Switch)
-        {
-            speed = defaultSpeed;
-            Switch = true;
-        }
-
+        rb.velocity = new Vector2(moveVector, rb.velocity.y);
     }
     void Jump()
     {
 
-        if (((isJoystickControl && variableJoystick.Direction.y >= 0.5f) || (Input.GetKeyDown(KeyCode.Space) && !isJoystickControl)) && isOnGround())
+        if (jump && isOnGround())
         {
             animator.Play("MC_Jump");
             rb.velocity = new Vector2(rb.velocity.x, JumpForce);
@@ -119,9 +102,14 @@ public class CharacterController : MonoBehaviour
     private bool isOnGround()
     {
         if (isOnGroundLeft() || isOnGroundRight())
+        {
             return true;
+        }
         else
+        {
+            LandParticles.Play();
             return false;
+        }
     }
     private bool isOnGroundLeft()
     {
@@ -175,16 +163,14 @@ public class CharacterController : MonoBehaviour
      }*/
     private void FlipCharacter()
     {
-        if (moveVector.x < 0 && FacingRight)
+        if (moveVector < 0 && FacingRight)
         {
             Flip();
-            isFacingRight = false;
         }
         else
-            if (moveVector.x > 0 && !FacingRight)
+            if (moveVector > 0 && !FacingRight)
         {
             Flip();
-            isFacingRight = true;
         }
     }
     private void Flip()
