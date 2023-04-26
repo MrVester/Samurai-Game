@@ -1784,6 +1784,7 @@ GameObject:
   - component: {fileID: 698755921}
   - component: {fileID: 698755920}
   - component: {fileID: 698755922}
+  - component: {fileID: 698755923}
   m_Layer: 6
   m_Name: Character
   m_TagString: Untagged
@@ -1929,11 +1930,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   variableJoystick: {fileID: 1534949215}
   isJoystickControl: 1
-  moveVector: {x: 0, y: 0}
   defaultSpeed: 4
   accSpeed: 4.5
   JumpForce: 5
-
   dashSpeed: 20
   dashTime: 0.1
   dashCoolDown: 2
