@@ -21,6 +21,7 @@ public class CharacterController : MonoBehaviour
     private bool isFacingRight = true;
     private bool isCharacterCanWalk = true;
 
+    public bool isDashButtonRelease = false;
 
     public float dashSpeed = 40f;
     public float dashTime = 0.2f;
@@ -30,7 +31,11 @@ public class CharacterController : MonoBehaviour
 
     private bool jump;
 
-
+    public void DashButtonRelease()
+    {
+        isDashButtonRelease = true;
+    }
+    
     public bool IsCharacterCanWalk
     {
         get
@@ -130,15 +135,16 @@ public class CharacterController : MonoBehaviour
     {
 
         dashTimer = Time.time + dashCoolDown;          //ИЗМЕНЕНИЕ ВРЕМЕНИ
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift)|| isDashButtonRelease)
         {
             if (dashTimer - lastDash < dashCoolDown) //CoolDown for Dash
             {
                 return;
             }
             lastDash = dashTimer;
+            Debug.Log("Dash");
             StartCoroutine(DashCoroutine());
-
+            isDashButtonRelease = false;
         }
     }
 
@@ -203,7 +209,7 @@ public class CharacterController : MonoBehaviour
         return raycastHit.collider != null;
     }
 
-    /* private bool isNearWall() //�������
+    /* private bool isNearWall() //�������
 
      {
          float additionalValue = 0.001f;
