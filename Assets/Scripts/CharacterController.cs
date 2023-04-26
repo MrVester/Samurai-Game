@@ -8,8 +8,7 @@ public class CharacterController : MonoBehaviour
     public bool isJoystickControl = false;
     private LayerMask platformLayerMask;
     private Rigidbody2D rb;
-    public Vector2 moveVector;
-    public float joystickMaxSpeed = 6f;
+    private float moveDir;
     public float defaultSpeed = 1f;
     private float speed;
     public float accSpeed = 1.5f;
@@ -22,6 +21,17 @@ public class CharacterController : MonoBehaviour
     private bool isFacingRight = true;
     private bool isCharacterCanWalk = true;
 
+<<<<<<< Updated upstream
+=======
+    public float dashSpeed = 40f;
+    public float dashTime = 0.2f;
+    public float dashCoolDown = 2f;
+    public float lastDash;
+    private float dashTimer;
+
+    private bool jump;
+
+>>>>>>> Stashed changes
     public bool IsCharacterCanWalk
     {
         get
@@ -47,8 +57,8 @@ public class CharacterController : MonoBehaviour
     }
     private void Update()
     {
-
-        SetAnimationsVar();
+        Dash();
+        SetAnimationsVariables();
         FlipCharacter();
         Jump();
 
@@ -69,12 +79,13 @@ public class CharacterController : MonoBehaviour
         // Debug.DrawRay(new Vector2(capsuleCollider2D.bounds.max.x, capsuleCollider2D.bounds.min.y), Vector2.down *  0.1f, Color.blue);
     }
 
-    void SetAnimationsVar()
+    void SetAnimationsVariables()
     {
         animator.SetFloat("VerticalVelocity", rb.velocity.y);
         animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
     }
 
+<<<<<<< Updated upstream
     void Walk()
     {
         if (isJoystickControl)
@@ -87,6 +98,21 @@ public class CharacterController : MonoBehaviour
             moveVector.x = Input.GetAxis("Horizontal");
             rb.velocity = new Vector2(speed * moveVector.x, rb.velocity.y);
         }
+=======
+    public void SetMoveDir(float value)
+    {
+        moveDir = value;
+    }
+
+    public void SetJump(bool value)
+    {
+        jump = value;
+    }
+
+    void Walk()
+    {
+        rb.velocity = new Vector2(moveDir, rb.velocity.y);
+>>>>>>> Stashed changes
 
         if (Input.GetKey(KeyCode.LeftShift) && Switch && Mathf.Abs(rb.velocity.x) > 0 && isOnGroundLeft())
         {
@@ -112,6 +138,43 @@ public class CharacterController : MonoBehaviour
 
 
         }
+    }
+
+    void Dash()
+    {
+
+        dashTimer = Time.time + dashCoolDown;          //ИЗМЕНЕНИЕ ВРЕМЕНИ
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            if (dashTimer - lastDash < dashCoolDown) //CoolDown for Dash
+            {
+                return;
+            }
+            lastDash = dashTimer;
+            StartCoroutine(DashCoroutine());
+
+        }
+    }
+
+    IEnumerator DashCoroutine()
+    {
+        float startTime = Time.time;
+
+        while (Time.time <= startTime + dashTime)
+        {
+
+            //rb.position += GetFacingVector() * new Vector3(1, 0.5f, 0) * dashSpeed * Time.deltaTime;
+            rb.position += new Vector2(variableJoystick.Horizontal, variableJoystick.Vertical) * dashSpeed * Time.deltaTime;
+
+            yield return null;
+        }
+
+    }
+    int GetFacingVector()
+    {
+        if (isFacingRight)
+            return 1;
+        return -1;
     }
     private bool isOnGround()
     {
@@ -154,7 +217,11 @@ public class CharacterController : MonoBehaviour
         return raycastHit.collider != null;
     }
 
+<<<<<<< Updated upstream
     /* private bool isNearWall() //�������
+=======
+    /* private bool isNearWall() //ФИКСИТЬ
+>>>>>>> Stashed changes
      {
          float additionalValue = 0.001f;
          RaycastHit2D raycastHit = Physics2D.Raycast(capsuleCollider2D.bounds.center, Vector2.right, capsuleCollider2D.bounds.extents.y, platformLayerMask);
@@ -172,13 +239,13 @@ public class CharacterController : MonoBehaviour
      }*/
     private void FlipCharacter()
     {
-        if (moveVector.x < 0 && FacingRight)
+        if (moveDir < 0 && FacingRight)
         {
             Flip();
             isFacingRight = false;
         }
         else
-            if (moveVector.x > 0 && !FacingRight)
+            if (moveDir > 0 && !FacingRight)
         {
             Flip();
             isFacingRight = true;
