@@ -21,8 +21,7 @@ public class CharacterController : MonoBehaviour
     private bool isFacingRight = true;
     private bool isCharacterCanWalk = true;
 
-<<<<<<< Updated upstream
-=======
+
     public float dashSpeed = 40f;
     public float dashTime = 0.2f;
     public float dashCoolDown = 2f;
@@ -31,7 +30,7 @@ public class CharacterController : MonoBehaviour
 
     private bool jump;
 
->>>>>>> Stashed changes
+
     public bool IsCharacterCanWalk
     {
         get
@@ -85,20 +84,7 @@ public class CharacterController : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
     }
 
-<<<<<<< Updated upstream
-    void Walk()
-    {
-        if (isJoystickControl)
-        {
-            moveVector.x = variableJoystick.Direction.x;
-            rb.velocity = new Vector2(joystickMaxSpeed * moveVector.x, rb.velocity.y);
-        }
-        else
-        {
-            moveVector.x = Input.GetAxis("Horizontal");
-            rb.velocity = new Vector2(speed * moveVector.x, rb.velocity.y);
-        }
-=======
+
     public void SetMoveDir(float value)
     {
         moveDir = value;
@@ -112,7 +98,7 @@ public class CharacterController : MonoBehaviour
     void Walk()
     {
         rb.velocity = new Vector2(moveDir, rb.velocity.y);
->>>>>>> Stashed changes
+
 
         if (Input.GetKey(KeyCode.LeftShift) && Switch && Mathf.Abs(rb.velocity.x) > 0 && isOnGroundLeft())
         {
@@ -217,11 +203,8 @@ public class CharacterController : MonoBehaviour
         return raycastHit.collider != null;
     }
 
-<<<<<<< Updated upstream
     /* private bool isNearWall() //ÔÈÊÑÈÒÜ
-=======
-    /* private bool isNearWall() //Ð¤Ð˜ÐšÐ¡Ð˜Ð¢Ð¬
->>>>>>> Stashed changes
+
      {
          float additionalValue = 0.001f;
          RaycastHit2D raycastHit = Physics2D.Raycast(capsuleCollider2D.bounds.center, Vector2.right, capsuleCollider2D.bounds.extents.y, platformLayerMask);
