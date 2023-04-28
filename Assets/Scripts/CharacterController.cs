@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
-    public VariableJoystick variableJoystick;
-    public bool isJoystickControl = false;
     private LayerMask platformLayerMask;
     private Rigidbody2D rb;
     private float moveDir;
@@ -14,12 +12,20 @@ public class CharacterController : MonoBehaviour
     public float accSpeed = 1.5f;
     public float JumpForce = 5f;
 
-    private bool Switch = true;
+
     private CapsuleCollider2D capsuleCollider2D;
     private Animator animator;
     private bool FacingRight = true;
-    private bool isFacingRight = true;
     private bool isCharacterCanWalk = true;
+    [Header("Movement")]
+    public float moveVector;
+    public float defaultSpeed = 1f;
+    private float speed;
+
+    [Header("Jumping")]
+    public ParticleSystem LandParticles;
+    private bool jump;
+    public float JumpForce = 5f;
 
     public bool isDashButtonRelease = false;
 
@@ -93,6 +99,7 @@ public class CharacterController : MonoBehaviour
     public void SetMoveDir(float value)
     {
         moveDir = value;
+
     }
 
     public void SetJump(bool value)
@@ -118,11 +125,12 @@ public class CharacterController : MonoBehaviour
             Switch = true;
         }
 
+
     }
     void Jump()
     {
 
-        if (((isJoystickControl && variableJoystick.Direction.y >= 0.5f) || (Input.GetKeyDown(KeyCode.Space) && !isJoystickControl)) && isOnGround())
+        if (jump && isOnGround())
         {
             animator.Play("MC_Jump");
             rb.velocity = new Vector2(rb.velocity.x, JumpForce);
@@ -171,9 +179,14 @@ public class CharacterController : MonoBehaviour
     private bool isOnGround()
     {
         if (isOnGroundLeft() || isOnGroundRight())
+        {
             return true;
+        }
         else
+        {
+            LandParticles.Play();
             return false;
+        }
     }
     private bool isOnGroundLeft()
     {
@@ -210,7 +223,6 @@ public class CharacterController : MonoBehaviour
     }
 
     /* private bool isNearWall() //�������
-
      {
          float additionalValue = 0.001f;
          RaycastHit2D raycastHit = Physics2D.Raycast(capsuleCollider2D.bounds.center, Vector2.right, capsuleCollider2D.bounds.extents.y, platformLayerMask);
@@ -228,16 +240,17 @@ public class CharacterController : MonoBehaviour
      }*/
     private void FlipCharacter()
     {
+
         if (moveDir < 0 && FacingRight)
+
         {
             Flip();
-            isFacingRight = false;
         }
         else
             if (moveDir > 0 && !FacingRight)
+
         {
             Flip();
-            isFacingRight = true;
         }
     }
     private void Flip()
