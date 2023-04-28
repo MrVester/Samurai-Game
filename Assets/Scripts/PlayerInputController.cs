@@ -4,10 +4,10 @@ using Application = UnityEngine.Device.Application;
 public class PlayerInputController : MonoBehaviour
 {
     [HideInInspector] public float HorizontalInput;
+    [HideInInspector] public float VerticalInput;
     [HideInInspector] public bool Jump;
     [HideInInspector] public bool Attack;
     [HideInInspector] public bool InputChanged;
-    public float maxCharacterSpeed = 6f;
 
 
     private CharacterController characterController;
@@ -35,18 +35,18 @@ public class PlayerInputController : MonoBehaviour
     {
         var horizontalInput = variableJoystick.Horizontal;
         var verticalInput = variableJoystick.Vertical;
-
         var jump = variableJoystick.Vertical > 0.5f;
-
         var attack = attackButton.Status;
-        InputChanged = (horizontalInput != HorizontalInput || jump != Jump || attack != Attack || verticalInput != variableJoystick.Vertical);
+
+        InputChanged = (horizontalInput != HorizontalInput || jump != Jump || attack != Attack || verticalInput != VerticalInput);
 
         HorizontalInput = horizontalInput;
+        VerticalInput = verticalInput;
         Jump = jump;
         Attack = attack;
 
-        characterController.SetJoystickInputs(horizontalInput, verticalInput);
-        characterController.SetMoveDir(HorizontalInput * maxCharacterSpeed);
+        characterController.SetHorizontal(HorizontalInput);
+        characterController.SetVertical(VerticalInput);
         characterController.SetJump(Jump);
 
         if (attack)

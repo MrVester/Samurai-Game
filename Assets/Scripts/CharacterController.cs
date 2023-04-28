@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CharacterController : MonoBehaviour
 {
+    [HideInInspector]
+    public UnityEvent CollidedWithSpikes;
     private LayerMask platformLayerMask;
     private Rigidbody2D rb;
 
@@ -14,10 +17,9 @@ public class CharacterController : MonoBehaviour
     private bool isCharacterCanWalk = true;
     private bool isInAir = false;
     [Header("Movement")]
-    public float moveVector;
+    public float maxCharacterSpeed = 6f;
     public float defaultSpeed = 1f;
     private float speed;
-    private float moveDir;
     private Vector2 joystickInput;
 
     [Header("Jumping")]
@@ -98,16 +100,14 @@ public class CharacterController : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
     }
 
-    public void SetJoystickInputs(float horizontalInput, float verticalInput)
+    public void SetHorizontal(float value)
     {
-        joystickInput.x = horizontalInput;
-        joystickInput.y = verticalInput;
-
+        joystickInput.x = value;
     }
-    public void SetMoveDir(float value)
+    
+    public void SetVertical(float value)
     {
-        moveDir = value;
-
+        joystickInput.y = value;
     }
 
     public void SetJump(bool value)
@@ -117,9 +117,7 @@ public class CharacterController : MonoBehaviour
 
     void Walk()
     {
-        rb.velocity = new Vector2(moveDir, rb.velocity.y);
-
-
+        rb.velocity = new Vector2(joystickInput.x * maxCharacterSpeed, rb.velocity.y);
     }
     void Jump()
     {
@@ -241,14 +239,14 @@ public class CharacterController : MonoBehaviour
     private void FlipCharacter()
     {
 
-        if (moveDir < 0 && FacingRight)
+        if (joystickInput.x < 0 && FacingRight)
 
         {
             Flip();
             isFacingRight = false;
         }
         else
-            if (moveDir > 0 && !FacingRight)
+            if (joystickInput.x > 0 && !FacingRight)
 
         {
             Flip();
@@ -262,6 +260,20 @@ public class CharacterController : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.tag != "Spikes")
+        {
+            return;
+        }
+
+        //BloodParticles.Play();
+
+        // TODO: Add knockback
+        
+        CollidedWithSpikes.Invoke();
     }
 
 }
