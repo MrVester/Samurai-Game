@@ -6,42 +6,37 @@ public class CharacterController : MonoBehaviour
 {
     private LayerMask platformLayerMask;
     private Rigidbody2D rb;
-    private float moveDir;
-    public float defaultSpeed = 1f;
-    private float speed;
-    public float accSpeed = 1.5f;
-    public float JumpForce = 5f;
 
 
     private CapsuleCollider2D capsuleCollider2D;
     private Animator animator;
     private bool FacingRight = true;
     private bool isCharacterCanWalk = true;
+    private bool isInAir = false;
     [Header("Movement")]
     public float moveVector;
     public float defaultSpeed = 1f;
     private float speed;
+    private float moveDir;
+    private Vector2 joystickInput;
 
     [Header("Jumping")]
-    public ParticleSystem LandParticles;
+    private ParticleSystem LandParticles;
     private bool jump;
     public float JumpForce = 5f;
 
-    public bool isDashButtonRelease = false;
-
-    public float dashSpeed = 40f;
-    public float dashTime = 0.2f;
-    public float dashCoolDown = 2f;
-    public float lastDash;
+    [Header("Dash")]
+    private float lastDash;
     private float dashTimer;
+    private bool isDashButtonReleased = false;
 
-    private bool jump;
 
+    private bool isFacingRight = true;
     public void DashButtonRelease()
     {
-        isDashButtonRelease = true;
+        isDashButtonReleased = true;
     }
-    
+
     public bool IsCharacterCanWalk
     {
         get
@@ -55,6 +50,7 @@ public class CharacterController : MonoBehaviour
     }
     void Start()
     {
+        LandParticles = transform.Find("Particles/LandParticle").GetComponent<ParticleSystem>();
         animator = GetComponent<Animator>();
         platformLayerMask = LayerMask.GetMask("Ground");
         capsuleCollider2D = GetComponent<CapsuleCollider2D>();
@@ -80,7 +76,14 @@ public class CharacterController : MonoBehaviour
         {
             animator.SetBool("IsOnGround", false);
         }
+        if (isOnGround() && isInAir)
+        {
+            //JustGrounded
+            isInAir = false;
+            LandParticles.Play();
 
+
+        }
         if (isCharacterCanWalk)
         {
             Walk();
@@ -95,7 +98,12 @@ public class CharacterController : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
     }
 
+    public void SetJoystickInputs(float horizontalInput, float verticalInput)
+    {
+        joystickInput.x = horizontalInput;
+        joystickInput.y = verticalInput;
 
+    }
     public void SetMoveDir(float value)
     {
         moveDir = value;
@@ -112,20 +120,6 @@ public class CharacterController : MonoBehaviour
         rb.velocity = new Vector2(moveDir, rb.velocity.y);
 
 
-        if (Input.GetKey(KeyCode.LeftShift) && Switch && Mathf.Abs(rb.velocity.x) > 0 && isOnGroundLeft())
-        {
-
-            speed = accSpeed;
-            Switch = false;
-        }
-
-        if (rb.velocity.x == 0 && !Switch)
-        {
-            speed = defaultSpeed;
-            Switch = true;
-        }
-
-
     }
     void Jump()
     {
@@ -135,24 +129,24 @@ public class CharacterController : MonoBehaviour
             animator.Play("MC_Jump");
             rb.velocity = new Vector2(rb.velocity.x, JumpForce);
 
-
+            StartCoroutine(SetBoolTrueAfterSecs(0.5f));
         }
     }
 
     void Dash()
     {
 
-        dashTimer = Time.time + dashCoolDown;          //ИЗМЕНЕНИЕ ВРЕМЕНИ
-        if (Input.GetKeyDown(KeyCode.LeftShift)|| isDashButtonRelease)
+        dashTimer = Time.time + CharacterParameters.DashCoolDown;          //ИЗМЕНЕНИЕ ВРЕМЕНИ
+        if (Input.GetKeyDown(KeyCode.LeftShift) || isDashButtonReleased)
         {
-            if (dashTimer - lastDash < dashCoolDown) //CoolDown for Dash
+            if (dashTimer - lastDash < CharacterParameters.DashCoolDown) //CoolDown for Dash
             {
                 return;
             }
             lastDash = dashTimer;
             Debug.Log("Dash");
             StartCoroutine(DashCoroutine());
-            isDashButtonRelease = false;
+            isDashButtonReleased = false;
         }
     }
 
@@ -160,11 +154,11 @@ public class CharacterController : MonoBehaviour
     {
         float startTime = Time.time;
 
-        while (Time.time <= startTime + dashTime)
+        while (Time.time <= startTime + CharacterParameters.DashTime)
         {
 
-            //rb.position += GetFacingVector() * new Vector3(1, 0.5f, 0) * dashSpeed * Time.deltaTime;
-            rb.position += new Vector2(variableJoystick.Horizontal, variableJoystick.Vertical) * dashSpeed * Time.deltaTime;
+            //rb.position += GetFacingVector() * new Vector2(1, 0.5f) * CharacterParameters.DashSpeed * Time.deltaTime;
+            rb.position += new Vector2(joystickInput.x, joystickInput.y) * CharacterParameters.DashSpeed * Time.deltaTime;
 
             yield return null;
         }
@@ -175,6 +169,7 @@ public class CharacterController : MonoBehaviour
         if (isFacingRight)
             return 1;
         return -1;
+
     }
     private bool isOnGround()
     {
@@ -184,9 +179,14 @@ public class CharacterController : MonoBehaviour
         }
         else
         {
-            LandParticles.Play();
             return false;
         }
+    }
+
+    IEnumerator SetBoolTrueAfterSecs(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        isInAir = true;
     }
     private bool isOnGroundLeft()
     {
@@ -245,12 +245,14 @@ public class CharacterController : MonoBehaviour
 
         {
             Flip();
+            isFacingRight = false;
         }
         else
             if (moveDir > 0 && !FacingRight)
 
         {
             Flip();
+            isFacingRight = true;
         }
     }
     private void Flip()

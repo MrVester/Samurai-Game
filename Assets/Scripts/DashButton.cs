@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -10,8 +8,8 @@ public class DashButton : MonoBehaviour
 
     public UnityEvent OnPressed;
     public float dashCoolDown = 2f;
-    Button _dashButton = null;
-    Image _dashButtonImage = null;
+    Button _dashButton;
+    Image _dashButtonImage;
 
     void Start()
     {
@@ -19,6 +17,10 @@ public class DashButton : MonoBehaviour
         _dashButton.onClick.AddListener(() => DashButtonRelease());
         _dashButtonImage = GetComponent<Image>();
         _dashButtonImage.fillAmount = 1f;
+        _dashButtonImage.type = Image.Type.Filled;
+        _dashButtonImage.fillMethod = Image.FillMethod.Radial360;
+        _dashButtonImage.fillOrigin = 2;
+
     }
 
 
@@ -28,17 +30,16 @@ public class DashButton : MonoBehaviour
         _dashButton.interactable = false;
         OnPressed.Invoke();
         StartCoroutine(DashCoroutine());
-        
+
 
     }
     IEnumerator DashCoroutine()
     {
-        float startTime = Time.time;
-        float dashTimer = Time.time + dashCoolDown;
+        float dashTimer = Time.time + CharacterParameters.DashCoolDown;
         _dashButtonImage.fillAmount = 0f;
         while (Time.time <= dashTimer)
         {
-            _dashButtonImage.fillAmount += 1.0f / dashCoolDown * Time.deltaTime;
+            _dashButtonImage.fillAmount += 1.0f / CharacterParameters.DashCoolDown * Time.deltaTime;
 
 
             yield return null;
