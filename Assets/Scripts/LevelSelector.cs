@@ -6,53 +6,52 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class LevelButtonsControl : MonoBehaviour
+public class LevelSelector : MonoBehaviour
 {
-    public GameObject GridLayout;
-    public GameObject buttonGOPrefab;
 
-    public int buttonsAmount;
-    public bool GenerateButtons = false;
+    public GameObject levelSelectorGrid;
+    public GameObject buttonGOPrefab;
 
     private TextMeshProUGUI buttonTextMeshPro;
 
 
-    private void Start()
-    {
-
-        CreateButtons();
-    }
     private void Update()
     {
-        if (GenerateButtons)
-        {
-            foreach (Transform child in GridLayout.transform)
-            {
-                Destroy(child.gameObject);
-            }
-            CreateButtons();
-        }
+
     }
-    void CreateButtons()
+    public void DestroyButtons()
+    {
+        foreach (Transform child in levelSelectorGrid.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+    }
+    public void CreateButtons(int buttonsAmount, int levelsCompleted)
     {
         for (int i = 0; i < buttonsAmount; i++)
         {
             int level = i + 1;
             GameObject currentGOButton = Instantiate(buttonGOPrefab);
 
-            currentGOButton.transform.SetParent(GridLayout.transform, false);
+            currentGOButton.transform.SetParent(levelSelectorGrid.transform, false);
 
             Button buttonPrefab = currentGOButton.GetComponent<Button>();
             buttonTextMeshPro = currentGOButton.GetComponentInChildren<TextMeshProUGUI>();
 
             buttonPrefab.onClick.AddListener(() => LoadLevel(level));
             buttonTextMeshPro.text = "Level" + (level);
-
-
+            if (level > levelsCompleted + 1)
+            {
+                buttonPrefab.interactable = false;
+            }
 
         }
-        GenerateButtons = false;
+
     }
+
+
+
     void LoadLevel(int level)
     {
         SceneManager.LoadScene("Level" + level);
