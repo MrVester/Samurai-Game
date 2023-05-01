@@ -12,7 +12,7 @@ public class MainMenuControl : MonoBehaviour
     public GameObject levelSelectorTab;
     public int levelsAmount;
     public int levelsCompleted;
-    public int[] levelStars;
+
     public bool isGenerateButtons = false;
     public Button backButtonFromLevelSelector;
     [Header("Settings")]
@@ -30,7 +30,7 @@ public class MainMenuControl : MonoBehaviour
 
     void Start()
     {
-        levelStars = new int[levelsAmount];
+
         levelSelector = GetComponent<LevelSelector>();
 
 
