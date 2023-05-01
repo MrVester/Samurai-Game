@@ -8,10 +8,11 @@ using TMPro;
 
 public class LevelSelector : MonoBehaviour
 {
-
+    [Header("LevelSelector")]
+    public string prefixToLvl;
+    public int[] levelStars;
     public GameObject levelSelectorGrid;
     public GameObject buttonGOPrefab;
-
     private TextMeshProUGUI buttonTextMeshPro;
 
 
@@ -33,14 +34,15 @@ public class LevelSelector : MonoBehaviour
         {
             int level = i + 1;
             GameObject currentGOButton = Instantiate(buttonGOPrefab);
-
+            StarsControl starsControl = currentGOButton.GetComponent<StarsControl>();
+            starsControl.DrawStars(levelStars[i]);
             currentGOButton.transform.SetParent(levelSelectorGrid.transform, false);
 
             Button buttonPrefab = currentGOButton.GetComponent<Button>();
             buttonTextMeshPro = currentGOButton.GetComponentInChildren<TextMeshProUGUI>();
 
             buttonPrefab.onClick.AddListener(() => LoadLevel(level));
-            buttonTextMeshPro.text = "Level" + (level);
+            buttonTextMeshPro.text = prefixToLvl + level;
             if (level > levelsCompleted + 1)
             {
                 buttonPrefab.interactable = false;

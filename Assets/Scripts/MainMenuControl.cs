@@ -10,8 +10,9 @@ public class MainMenuControl : MonoBehaviour
     private LevelSelector levelSelector;
     [Header("LevelSelector")]
     public GameObject levelSelectorTab;
-    public int buttonsAmount;
+    public int levelsAmount;
     public int levelsCompleted;
+    public int[] levelStars;
     public bool isGenerateButtons = false;
     public Button backButtonFromLevelSelector;
     [Header("Settings")]
@@ -29,6 +30,7 @@ public class MainMenuControl : MonoBehaviour
 
     void Start()
     {
+        levelStars = new int[levelsAmount];
         levelSelector = GetComponent<LevelSelector>();
 
 
@@ -48,7 +50,7 @@ public class MainMenuControl : MonoBehaviour
         if (isGenerateButtons)
         {
             levelSelector.DestroyButtons();
-            levelSelector.CreateButtons(buttonsAmount, levelsCompleted);
+            levelSelector.CreateButtons(levelsAmount, levelsCompleted);
             isGenerateButtons = false;
         }
     }
@@ -72,7 +74,7 @@ public class MainMenuControl : MonoBehaviour
 
     private void LevelSelectionButtonEvent()
     {
-        levelSelector.CreateButtons(buttonsAmount, levelsCompleted);
+        levelSelector.CreateButtons(levelsAmount, levelsCompleted);
         levelSelectorTab.SetActive(true);
         mainMenuTab.SetActive(false);
     }
