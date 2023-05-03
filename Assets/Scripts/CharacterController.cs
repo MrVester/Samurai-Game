@@ -63,7 +63,7 @@ public class CharacterController : MonoBehaviour
     {
         speed = defaultSpeed;
     }
-    private void Update()
+    private void FixedUpdate()
     {
         Dash();
         SetAnimationsVariables();
