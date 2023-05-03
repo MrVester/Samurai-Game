@@ -23,4 +23,15 @@ public class JSONSaveConfig
         return string.IsNullOrEmpty(SaveFilePath) ? Application.persistentDataPath : SaveFilePath;
     }
 
+    public static JSONSaveConfig GetConfig()
+    {
+        return new JSONSaveConfig
+        {
+            SaveFileName = "data.json",
+            AutoSaveData = true,
+            ScrambleSaveData = false,
+            EncryptionSecret = "123",
+        };
+    }
+
 }

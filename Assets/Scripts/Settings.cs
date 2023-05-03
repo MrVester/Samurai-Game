@@ -15,12 +15,13 @@ public class Settings : MonoBehaviour
 
     void Start()
     {
+        JSONSave.Start(JSONSaveConfig.GetConfig());
         toggleVolume.onValueChanged.AddListener((value) => SetVolumeZero());
         slider.onValueChanged.AddListener((value) => SetVolume());
         audioSrc = GetComponent<AudioSource>();
-        if (PlayerPrefs.HasKey("SaveVolume"))
+        if (JSONSave.HasKey("SaveVolume"))
         {
-            slider.value = audioSrc.volume = PlayerPrefs.GetFloat("SaveVolume");
+            slider.value = audioSrc.volume = JSONSave.GetFloat("SaveVolume");
         }
 
         else
@@ -43,10 +44,10 @@ public class Settings : MonoBehaviour
     public void SetVolume()
     {
         audioSrc.volume = slider.value;
-        PlayerPrefs.SetFloat("SaveVolume", slider.value);
+        JSONSave.SetFloat("SaveVolume", slider.value);
         if (slider.value > 0 && !toggleVolume.isOn)
         {
-            //PlayerPrefs.SetFloat("VolumeBuf", 0f);
+            //JSONSave.SetFloat("VolumeBuf", 0f);
             toggleVolume.isOn = true;
 
         }
@@ -60,14 +61,14 @@ public class Settings : MonoBehaviour
     {
         if (slider.value > 0 && !toggleVolume.isOn)
         {
-            PlayerPrefs.SetFloat("VolumeBuf", slider.value);
-            PlayerPrefs.SetFloat("SaveVolume", 0f);
+            JSONSave.SetFloat("VolumeBuf", slider.value);
+            JSONSave.SetFloat("SaveVolume", 0f);
             audioSrc.volume = slider.value = 0f;
         }
 
         if (slider.value == 0 && toggleVolume.isOn)
         {
-            audioSrc.volume = slider.value = PlayerPrefs.GetFloat("VolumeBuf");
+            audioSrc.volume = slider.value = JSONSave.GetFloat("VolumeBuf");
 
         }
     }
@@ -93,9 +94,9 @@ public class Settings : MonoBehaviour
 
     private void Awake()
     {
-        if(PlayerPrefs.HasKey(this.saveVolumeKey))
+        if(JSONSave.HasKey(this.saveVolumeKey))
         {
-            this.volume = PlayerPrefs.GetFloat(this.saveVolumeKey);
+            this.volume = JSONSave.GetFloat(this.saveVolumeKey);
             this.audio.volume = this.volume;
 
             GameObject sliderObj = GameObject.FindWithTag(this.sliderTag);
@@ -108,7 +109,7 @@ public class Settings : MonoBehaviour
         else
         {
             this.volume = 0.5f;
-            PlayerPrefs.SetFloat(this.saveVolumeKey, this.volume);
+            JSONSave.SetFloat(this.saveVolumeKey, this.volume);
             this.audio.volume = this.volume;
         }
     }
@@ -123,7 +124,7 @@ private void LateUpdate()
 
             if(this.audio.volume != this.volume)
             {
-                PlayerPrefs.SetFloat(this.saveVolumeKey, this.volume); 
+                JSONSave.SetFloat(this.saveVolumeKey, this.volume); 
             }
 
             GameObject textObj = GameObject.FindWithTag(this.textVolumeTag);
