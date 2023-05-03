@@ -6,7 +6,6 @@ using UnityEngine.Events;
 public class CharacterController : MonoBehaviour
 {
     [HideInInspector]
-    public UnityEvent CollidedWithSpikes;
     private LayerMask platformLayerMask;
     private Rigidbody2D rb;
 
@@ -63,7 +62,7 @@ public class CharacterController : MonoBehaviour
     {
         speed = defaultSpeed;
     }
-    private void FixedUpdate()
+    private void Update()
     {
         Dash();
         SetAnimationsVariables();
@@ -104,7 +103,7 @@ public class CharacterController : MonoBehaviour
     {
         joystickInput.x = value;
     }
-    
+
     public void SetVertical(float value)
     {
         joystickInput.y = value;
@@ -262,19 +261,7 @@ public class CharacterController : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.tag != "Spikes")
-        {
-            return;
-        }
 
-        //BloodParticles.Play();
-
-        // TODO: Add knockback
-        
-        CollidedWithSpikes.Invoke();
-    }
 
 }
 
