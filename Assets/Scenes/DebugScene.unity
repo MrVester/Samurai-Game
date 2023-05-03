@@ -2429,7 +2429,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  dashCoolDown: 2
 --- !u!1 &1446232576
 GameObject:
   m_ObjectHideFlags: 0
@@ -2647,6 +2646,10 @@ PrefabInstance:
     - target: {fileID: 1642649362252029944, guid: aa6063a6bab84a24e8474d824ccf50f7, type: 3}
       propertyPath: m_Name
       value: Character
+      objectReference: {fileID: 0}
+    - target: {fileID: 1642649362252029944, guid: aa6063a6bab84a24e8474d824ccf50f7, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 1642649362252029947, guid: aa6063a6bab84a24e8474d824ccf50f7, type: 3}
       propertyPath: m_RootOrder

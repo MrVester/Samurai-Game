@@ -7,7 +7,6 @@ public class DashButton : MonoBehaviour
 {
 
     public UnityEvent OnPressed;
-    public float dashCoolDown = 2f;
     Button _dashButton;
     Image _dashButtonImage;
 

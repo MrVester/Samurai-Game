@@ -23,6 +23,12 @@ public class GameManager : MonoBehaviour
 
     private void InitGameManager()
     {
-        
+        JSONSave.Start(new JSONSaveConfig
+        {
+            SaveFileName = "data.json",
+            AutoSaveData = true,
+            ScrambleSaveData = false,
+            EncryptionSecret = "123",
+        });
     }
 }

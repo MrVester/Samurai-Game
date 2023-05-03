@@ -7,6 +7,7 @@ public class AttackButton : MonoBehaviour
 {
     public UnityEvent OnPressed;
     private Button _attackButton;
+    private Weapon _weapon;
     public bool Status = false;
     Image _attackButtonImage;
 
@@ -20,27 +21,31 @@ public class AttackButton : MonoBehaviour
         _attackButtonImage.type = Image.Type.Filled;
         _attackButtonImage.fillMethod = Image.FillMethod.Radial360;
         _attackButtonImage.fillOrigin = 2;
+        // get current weapon attack interval
+        _weapon = GameObject.FindWithTag("Player").GetComponent<PlayerWeaponController>().Weapon;
     }
 
     void AttackButtonRelease()
     {
         _attackButton.interactable = false;
+        Status = true;
         OnPressed.Invoke();
         StartCoroutine(AttackCoroutine());
     }
 
     IEnumerator AttackCoroutine()
     {
-        float attackTimer = Time.time + CharacterParameters.AttackCoolDown;
+        float attackTimer = Time.time + _weapon.AttackInterval;
         _attackButtonImage.fillAmount = 0f;
         while (Time.time <= attackTimer)
         {
-            _attackButtonImage.fillAmount += 1.0f / CharacterParameters.AttackCoolDown * Time.deltaTime;
+            _attackButtonImage.fillAmount += 1.0f / _weapon.AttackInterval * Time.deltaTime;
 
 
             yield return null;
         }
         _attackButtonImage.fillAmount = 1.0f;
+        Status = false;
         _attackButton.interactable = true;
 
     }
