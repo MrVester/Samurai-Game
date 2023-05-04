@@ -19,8 +19,20 @@ public class DashButton : MonoBehaviour
         _dashButtonImage.type = Image.Type.Filled;
         _dashButtonImage.fillMethod = Image.FillMethod.Radial360;
         _dashButtonImage.fillOrigin = 2;
-
+        UIEvents.current.onPlayStart += ButtonEnable;
+        UIEvents.current.onGameStop += ButtonDisable;
     }
+
+    private void ButtonDisable()
+    {
+        _dashButton.interactable = false;
+    }
+
+    private void ButtonEnable()
+    {
+        _dashButton.interactable = true;
+    }
+
 
 
 

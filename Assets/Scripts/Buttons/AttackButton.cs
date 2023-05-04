@@ -23,6 +23,18 @@ public class AttackButton : MonoBehaviour
         _attackButtonImage.fillOrigin = 2;
         // get current weapon attack interval
         _weapon = GameObject.FindWithTag("Player").GetComponent<PlayerWeaponController>().Weapon;
+        UIEvents.current.onPlayStart += ButtonEnable;
+        UIEvents.current.onGameStop += ButtonDisable;
+    }
+
+    private void ButtonDisable()
+    {
+        _attackButton.interactable = false;
+    }
+
+    private void ButtonEnable()
+    {
+        _attackButton.interactable = true;
     }
 
     void AttackButtonRelease()
