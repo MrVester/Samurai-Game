@@ -9,7 +9,7 @@ public class DashButton : MonoBehaviour
     public UnityEvent OnPressed;
     Button _dashButton;
     Image _dashButtonImage;
-
+    bool _buttonState;
     void Start()
     {
         _dashButton = GetComponent<Button>();
@@ -25,12 +25,13 @@ public class DashButton : MonoBehaviour
 
     private void ButtonDisable()
     {
+        _buttonState = _dashButton.interactable;
         _dashButton.interactable = false;
     }
 
     private void ButtonEnable()
     {
-        _dashButton.interactable = true;
+        _dashButton.interactable = _buttonState;
     }
 
 

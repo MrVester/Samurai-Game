@@ -10,7 +10,7 @@ public class AttackButton : MonoBehaviour
     private Weapon _weapon;
     public bool Status = false;
     Image _attackButtonImage;
-
+    bool _buttonState;
 
     void Start()
     {
@@ -29,12 +29,13 @@ public class AttackButton : MonoBehaviour
 
     private void ButtonDisable()
     {
+        _buttonState = _attackButton.interactable;
         _attackButton.interactable = false;
     }
 
     private void ButtonEnable()
     {
-        _attackButton.interactable = true;
+        _attackButton.interactable = _buttonState;
     }
 
     void AttackButtonRelease()
