@@ -14,7 +14,7 @@ public class PlayerInputController : MonoBehaviour
     private PlayerWeaponController playerWeaponController;
     public VariableJoystick variableJoystick;
     public AttackButton attackButton;
-
+    
     private void Start()
     {
         if (Application.platform != RuntimePlatform.Android)

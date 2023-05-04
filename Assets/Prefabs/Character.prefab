@@ -4829,9 +4829,11 @@ GameObject:
   - component: {fileID: 1642649362252029927}
   - component: {fileID: 1642649362252029926}
   - component: {fileID: 1642649362252029920}
+  - component: {fileID: 1251029751}
+  - component: {fileID: 1251029758}
   m_Layer: 6
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4892,7 +4894,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: d40765e5c7c905a4e9180f3dc233a8b5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4957,7 +4959,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: d2dbcb6d5cd2697489fc172f01a18beb, type: 2}
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -4974,10 +4976,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HorizontalInput: 0
+  VerticalInput: 0
   Jump: 0
   Attack: 0
   InputChanged: 0
-  maxCharacterSpeed: 6
   variableJoystick: {fileID: 0}
   attackButton: {fileID: 0}
 --- !u!114 &1642649362252029926
@@ -4992,7 +4994,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc852327b88279644963267a37a1b4ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveVector: 0
+  maxCharacterSpeed: 6
   defaultSpeed: 4
   JumpForce: 5
 --- !u!114 &1642649362252029920
@@ -5008,6 +5010,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Weapon: {fileID: 0}
+--- !u!114 &1251029751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642649362252029944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073db3c734bb6d9498d10f1de9bb1779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 10
+  health: 0
+--- !u!114 &1251029758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642649362252029944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e697040bbf28640a8e61d1189b95eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1642649362648147949
 GameObject:
   m_ObjectHideFlags: 0

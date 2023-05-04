@@ -5,7 +5,7 @@ using UnityEditor.PackageManager;
 public class CharacterEvents : MonoBehaviour
 {
     public static CharacterEvents current;
-    void Start()
+    void Awake()
     {
         current = this;
     }
@@ -33,7 +33,10 @@ public class CharacterEvents : MonoBehaviour
     public void Dash()
     {
         if (onDash != null)
+        {
             onDash();
+        }
+            
     }
 
 }

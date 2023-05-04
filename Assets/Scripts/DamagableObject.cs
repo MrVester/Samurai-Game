@@ -36,7 +36,7 @@ public class DamagableObject : MonoBehaviour
 
     }
 
-    //Тикает, когда Player внутри коллайдера(даже когда стоит на месте, в отличие от OnTriggerStay)
+    //пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ Player пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ(пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ OnTriggerStay)
     /* private void OnTriggerEnter2D(Collider2D collider)
      {
          if (collider.tag == "Player")

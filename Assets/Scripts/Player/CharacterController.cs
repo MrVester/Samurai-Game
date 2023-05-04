@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System;
 
 public class CharacterController : MonoBehaviour
 {
@@ -48,13 +49,16 @@ public class CharacterController : MonoBehaviour
     }
     void Start()
     {
+        
         LandParticles = transform.Find("Particles/LandParticle").GetComponent<ParticleSystem>();
         animator = GetComponent<Animator>();
         platformLayerMask = LayerMask.GetMask("Ground");
         capsuleCollider2D = GetComponent<CapsuleCollider2D>();
+        
         rb = GetComponent<Rigidbody2D>();
         speed = defaultSpeed;
-        CharacterEvents.current.onDash += Dash;
+
+        CharacterEvents.current.onDash += DashPlayer;
     }
     private void OnValidate()
     {
@@ -129,7 +133,7 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    void Dash()
+    void DashPlayer()
     {
 
         dashTimer = Time.time + CharacterParameters.DashCoolDown;          //ИЗМЕНЕНИЕ ВРЕМЕНИ
