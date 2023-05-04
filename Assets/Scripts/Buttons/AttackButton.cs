@@ -42,7 +42,7 @@ public class AttackButton : MonoBehaviour
     {
         _attackButton.interactable = false;
         Status = true;
-        OnPressed.Invoke();
+        CharacterEvents.current.Attack();
         StartCoroutine(AttackCoroutine());
     }
 

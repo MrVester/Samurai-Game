@@ -29,14 +29,11 @@ public class CharacterController : MonoBehaviour
     [Header("Dash")]
     private float lastDash;
     private float dashTimer;
-    private bool isDashButtonReleased = false;
+
 
 
     private bool isFacingRight = true;
-    public void DashButtonRelease()
-    {
-        isDashButtonReleased = true;
-    }
+
 
     public bool IsCharacterCanWalk
     {
@@ -57,14 +54,16 @@ public class CharacterController : MonoBehaviour
         capsuleCollider2D = GetComponent<CapsuleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         speed = defaultSpeed;
+        CharacterEvents.current.onDash += Dash;
     }
     private void OnValidate()
     {
         speed = defaultSpeed;
+        
     }
     private void Update()
     {
-        Dash();
+        
         SetAnimationsVariables();
         FlipCharacter();
         Jump();
@@ -134,8 +133,7 @@ public class CharacterController : MonoBehaviour
     {
 
         dashTimer = Time.time + CharacterParameters.DashCoolDown;          //ИЗМЕНЕНИЕ ВРЕМЕНИ
-        if (Input.GetKeyDown(KeyCode.LeftShift) || isDashButtonReleased)
-        {
+
             if (dashTimer - lastDash < CharacterParameters.DashCoolDown) //CoolDown for Dash
             {
                 return;
@@ -143,8 +141,7 @@ public class CharacterController : MonoBehaviour
             lastDash = dashTimer;
             Debug.Log("Dash");
             StartCoroutine(DashCoroutine());
-            isDashButtonReleased = false;
-        }
+
     }
 
     IEnumerator DashCoroutine()

@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class DashButton : MonoBehaviour
 {
 
-    public UnityEvent OnPressed;
     Button _dashButton;
     Image _dashButtonImage;
     bool _buttonState;
@@ -40,7 +39,7 @@ public class DashButton : MonoBehaviour
     void DashButtonRelease()
     {
         _dashButton.interactable = false;
-        OnPressed.Invoke();
+        CharacterEvents.current.Dash();
         StartCoroutine(DashCoroutine());
 
 
