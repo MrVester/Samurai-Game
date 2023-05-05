@@ -19,7 +19,6 @@ public class EnemyAI : MonoBehaviour
     }
     public GameObject GetPlayer()
     {
-        Debug.Log("Player got");
         return player;
     }
 }

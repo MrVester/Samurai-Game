@@ -7,7 +7,7 @@ using System;
 public class CharacterController : MonoBehaviour
 {
     [HideInInspector]
-    private LayerMask platformLayerMask;
+    private LayerMask groundLayerMask;
     private Rigidbody2D rb;
 
 
@@ -52,7 +52,7 @@ public class CharacterController : MonoBehaviour
         
         LandParticles = transform.Find("Particles/LandParticle").GetComponent<ParticleSystem>();
         animator = GetComponent<Animator>();
-        platformLayerMask = LayerMask.GetMask("Ground");
+        groundLayerMask = LayerMask.GetMask("Ground");
         capsuleCollider2D = GetComponent<CapsuleCollider2D>();
         
         rb = GetComponent<Rigidbody2D>();
@@ -189,7 +189,7 @@ public class CharacterController : MonoBehaviour
     private bool isOnGroundLeft()
     {
         float additionalHeightValue = 0.1f;
-        RaycastHit2D raycastHit = Physics2D.Raycast(new Vector2(capsuleCollider2D.bounds.min.x, capsuleCollider2D.bounds.center.y), Vector2.down, capsuleCollider2D.bounds.extents.y + additionalHeightValue, platformLayerMask);
+        RaycastHit2D raycastHit = Physics2D.Raycast(new Vector2(capsuleCollider2D.bounds.min.x, capsuleCollider2D.bounds.center.y), Vector2.down, capsuleCollider2D.bounds.extents.y + additionalHeightValue, groundLayerMask);
         Color rayColor;
         if (raycastHit.collider != null)
         {
@@ -206,7 +206,7 @@ public class CharacterController : MonoBehaviour
     private bool isOnGroundRight()
     {
         float additionalHeightValue = 0.1f;
-        RaycastHit2D raycastHit = Physics2D.Raycast(new Vector2(capsuleCollider2D.bounds.max.x, capsuleCollider2D.bounds.center.y), Vector2.down, capsuleCollider2D.bounds.extents.y + additionalHeightValue, platformLayerMask);
+        RaycastHit2D raycastHit = Physics2D.Raycast(new Vector2(capsuleCollider2D.bounds.max.x, capsuleCollider2D.bounds.center.y), Vector2.down, capsuleCollider2D.bounds.extents.y + additionalHeightValue, groundLayerMask);
         Color rayColor;
         if (raycastHit.collider != null)
         {

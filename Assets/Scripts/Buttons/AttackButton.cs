@@ -7,7 +7,6 @@ public class AttackButton : MonoBehaviour
 {
     public UnityEvent OnPressed;
     private Button _attackButton;
-    private Weapon _weapon;
     public bool Status = false;
     Image _attackButtonImage;
     bool _buttonState;
@@ -22,7 +21,7 @@ public class AttackButton : MonoBehaviour
         _attackButtonImage.fillMethod = Image.FillMethod.Radial360;
         _attackButtonImage.fillOrigin = 2;
         // get current weapon attack interval
-        _weapon = GameObject.FindWithTag("Player").GetComponent<PlayerWeaponController>().Weapon;
+
         UIEvents.current.onPlayStart += ButtonEnable;
         UIEvents.current.onGameStop += ButtonDisable;
     }
@@ -44,15 +43,17 @@ public class AttackButton : MonoBehaviour
         Status = true;
         CharacterEvents.current.Attack();
         StartCoroutine(AttackCoroutine());
+
     }
 
     IEnumerator AttackCoroutine()
     {
-        float attackTimer = Time.time + _weapon.AttackInterval;
+        float attackTimer = Time.time + CharacterParameters.AttackCoolDown;
         _attackButtonImage.fillAmount = 0f;
+
         while (Time.time <= attackTimer)
         {
-            _attackButtonImage.fillAmount += 1.0f / _weapon.AttackInterval * Time.deltaTime;
+            _attackButtonImage.fillAmount += 1.0f / CharacterParameters.AttackCoolDown * Time.deltaTime;
 
 
             yield return null;

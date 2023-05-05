@@ -15,8 +15,8 @@ TagManager:
   - Character
   - Ground
   - CamCollider
-  - 
-  - 
+  - EnemySoldier
+  - EnemyBoss
   - 
   - 
   - 

@@ -14,7 +14,7 @@ public class PlayerInputController : MonoBehaviour
     private PlayerWeaponController playerWeaponController;
     public VariableJoystick variableJoystick;
     public AttackButton attackButton;
-    
+
     private void Start()
     {
         if (Application.platform != RuntimePlatform.Android)
@@ -27,8 +27,9 @@ public class PlayerInputController : MonoBehaviour
         }
 
         characterController = GetComponentInChildren<CharacterController>();
-
         playerWeaponController = GetComponentInChildren<PlayerWeaponController>();
+
+        CharacterEvents.current.onAttack += playerWeaponController.Attack;
     }
 
     private void Update()
@@ -49,9 +50,6 @@ public class PlayerInputController : MonoBehaviour
         characterController.SetVertical(VerticalInput);
         characterController.SetJump(Jump);
 
-        if (attack)
-        {
-            playerWeaponController.Attack();
-        }
+
     }
 }

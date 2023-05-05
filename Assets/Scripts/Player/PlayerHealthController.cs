@@ -14,7 +14,7 @@ public class PlayerHealthController : MonoBehaviour
 
         characterController = GetComponentInChildren<CharacterController>();
         playerInputController = GetComponent<PlayerInputController>();
-       /// CharacterEvents.current.onTakeDamage += TakeDamage;
+        /// CharacterEvents.current.onTakeDamage += TakeDamage;
     }
 
     public void TakeDamage(float damage)

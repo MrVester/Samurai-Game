@@ -1,24 +1,43 @@
+using System.Collections;
 using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
-    public float AttackInterval = 0.25f;
+    public float attackCoolDown = 0.25f;
+    public Transform attackPoint;
+    public float attackRange = 0.25f;
+    public float weaponDamage = 1;
+    public LayerMask enemyLayers;
 
-    private float attackTimer;
-
-    private void Update()
+    public void Start()
     {
-        attackTimer -= Time.deltaTime;
+        enemyLayers = LayerMask.GetMask("EnemySoldier", "EnemyBoss");
     }
-
     public void Attack()
     {
-        if (attackTimer <= 0)
-        {
-            CallAttack();
-            attackTimer = AttackInterval;
-        }
+        CallAttack();
     }
 
     protected abstract void CallAttack();
+
+
+
+    public void DealDamage()
+    {
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        foreach (Collider2D collider in hitEnemies)
+        {
+            collider.gameObject.GetComponent<EnemyHealthController>().TakeDamage(weaponDamage);
+        }
+    }
+    public IEnumerator DealDamageCoroutine()
+    {
+        yield return new WaitForSeconds(0);
+        DealDamage();
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
 }
