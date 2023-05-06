@@ -24,6 +24,7 @@ public class AttackButton : MonoBehaviour
 
         UIEvents.current.onPlayStart += ButtonEnable;
         UIEvents.current.onGameStop += ButtonDisable;
+        CharacterEvents.current.onDeath += ButtonDisable;
     }
 
     private void ButtonDisable()

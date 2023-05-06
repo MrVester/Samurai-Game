@@ -261,6 +261,10 @@ public class CharacterController : MonoBehaviour
         transform.localScale = theScale;
 
     }
+    public void PlayDeathAnimation()
+    {
+        animator.Play("MC_Dead");
+    }
 
 
 

@@ -20,6 +20,7 @@ public class DashButton : MonoBehaviour
         _dashButtonImage.fillOrigin = 2;
         UIEvents.current.onPlayStart += ButtonEnable;
         UIEvents.current.onGameStop += ButtonDisable;
+        CharacterEvents.current.onDeath += ButtonDisable;
     }
 
     private void ButtonDisable()

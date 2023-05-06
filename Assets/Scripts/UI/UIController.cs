@@ -9,26 +9,38 @@ using UnityEditor.U2D.Path.GUIFramework;
 public class UIController : MonoBehaviour
 {
     [SerializeField]
-    GameObject Menu;
+    private GameObject Menu;
     [SerializeField]
-    GameObject Controls;
+    private GameObject Controls;
+    [SerializeField]
+    private GameObject DeadScreen;
     [SerializeField]
     private TMP_Text returnText;
     [SerializeField]
     private Image returnImage;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         Menu.SetActive(false);
         Controls.SetActive(true);
+        DeadScreen.SetActive(false);
         UIEvents.current.onGameStop += StopGame;
         UIEvents.current.onGameStart += StartGame;
+        CharacterEvents.current.onDeath += Dead;
         returnImage.fillAmount = 0f;
         returnImage.type = Image.Type.Filled;
         returnImage.fillMethod = Image.FillMethod.Radial360;
         returnImage.fillOrigin = 2;
         returnText.text = "";
+    }
+
+    private void Dead()
+    {
+        Menu.SetActive(false);
+        Controls.GetComponent<Canvas>().enabled = false;
+        StartCoroutine(DeathScreenCoroutine());
     }
 
     private void StopGame()
@@ -43,18 +55,18 @@ public class UIController : MonoBehaviour
     {
         Menu.SetActive(false);
         returnImage.gameObject.SetActive(true);
-        StartCoroutine(ReturnCoroutine());
+        StartCoroutine(ResumeGame());
 
     }
 
-    IEnumerator ReturnCoroutine()
+    IEnumerator ResumeGame()
     {
-        float attackTimer = Time.unscaledTime + 3;
+        float timeToResume = Time.unscaledTime + 3;
         returnImage.fillAmount = 1f;
-        while (Time.unscaledTime <= attackTimer)
+        while (Time.unscaledTime <= timeToResume)
         {
             returnImage.fillAmount -= 1.0f / 3 * Time.unscaledDeltaTime;
-            returnText.text = ((int)(attackTimer - Time.unscaledTime)+1).ToString();
+            returnText.text = ((int)(timeToResume - Time.unscaledTime)+1).ToString();
 
             yield return null;
         }
@@ -63,6 +75,28 @@ public class UIController : MonoBehaviour
         Controls.GetComponent<Canvas>().enabled = true;
         Time.timeScale = 1;
         UIEvents.current.PlayStart();
+    }
+    IEnumerator DeathScreenCoroutine()
+    {
+        float deathTimer = Time.unscaledTime + 3;
+        while (Time.unscaledTime <= deathTimer)
+        {
+            Debug.Log(Time.timeScale);
+            if (Time.timeScale >0.1f)
+            {
+                Time.timeScale -= 1.0f / 3 * Time.unscaledDeltaTime; ;
+            }
+            else
+            {
+                break;
+            }
+            yield return null;
+        }
+        
+        DeadScreen.SetActive(true);
+
+        Time.timeScale = 1;
+
     }
 }
 

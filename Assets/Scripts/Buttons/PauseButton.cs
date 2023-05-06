@@ -12,6 +12,7 @@ public class PauseButton : MonoBehaviour
         _pauseButton.onClick.AddListener(() => PauseButtonRelease());
         UIEvents.current.onPlayStart += ButtonEnable;
         UIEvents.current.onGameStop += ButtonDisable;
+        CharacterEvents.current.onDeath += ButtonDisable;
     }
 
     private void ButtonDisable()

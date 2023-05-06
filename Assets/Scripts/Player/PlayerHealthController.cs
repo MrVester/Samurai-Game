@@ -7,7 +7,7 @@ public class PlayerHealthController : MonoBehaviour
     private float health;
     private CharacterController characterController;
     private PlayerInputController playerInputController;
-
+    private bool isDead = false;
     private void Start()
     {
         health = MaxHealth;
@@ -29,15 +29,20 @@ public class PlayerHealthController : MonoBehaviour
                 {
                   PlayerDied();
                 } */
-
+        if (health <= 0 && !isDead)
+        {
+            isDead = true;  
+            PlayerDied();
+        }
     }
     private void PlayerDied()
     {
-        /* playerInputController.enabled = false;
+        CharacterEvents.current.Death();
+        playerInputController.enabled = false;
          characterController.SetJump(false);
          characterController.SetHorizontal(0);
          characterController.SetVertical(0);
-         //characterController.PlayDeathAnimation();
+        characterController.PlayDeathAnimation();
          // TODO: Died event*/
     }
 
