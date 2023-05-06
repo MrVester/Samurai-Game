@@ -7,4 +7,8 @@ public class PlayerWeaponController : MonoBehaviour
     {
         Weapon.Attack();
     }
+    public void DealDamage()
+    {
+        Weapon.DealDamage();
+    }
 }

@@ -22,28 +22,33 @@ public class PlayerHealthController : MonoBehaviour
         //BloodParticles.Play();
 
         // TODO: Add knockback
+
         health -= damage;
-        Debug.Log("Player health: " + health);
+
         // if hp is less than 0, call PlayerDied event
-        /*         if (health <= 0)
-                {
-                  PlayerDied();
-                } */
         if (health <= 0 && !isDead)
         {
-            isDead = true;  
+            isDead = true;
             PlayerDied();
+        }
+
+        else
+
+        if (health > 0 && !isDead)
+        {
+
+            Debug.Log("Player health: " + health);
         }
     }
     private void PlayerDied()
     {
         CharacterEvents.current.Death();
         playerInputController.enabled = false;
-         characterController.SetJump(false);
-         characterController.SetHorizontal(0);
-         characterController.SetVertical(0);
+        characterController.SetJump(false);
+        characterController.SetHorizontal(0);
+        characterController.SetVertical(0);
         characterController.PlayDeathAnimation();
-         // TODO: Died event*/
+        // TODO: Died event*/
     }
 
 }

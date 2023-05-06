@@ -1,15 +1,15 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Katana : Weapon
+public class EnemySaber : Weapon
 {
-    [Header("Damaging")]
-    // private CharacterController characterController;
-    private Animator characterAnimator;
+
+    private Animator enemyAnimator;
     public new void Start()
     {
         base.Start();
-        characterAnimator = transform.root.GetComponent<Animator>();
+        enemyAnimator = transform.root.GetComponent<Animator>();
         CharacterParameters.AttackCoolDown = attackCoolDown;
         //characterController = GetComponentInParent<CharacterController>();
 
@@ -20,12 +20,8 @@ public class Katana : Weapon
     {
 
         // Attack enemy
-        Debug.Log("Attack");
+        Debug.Log("Enemy Attack");
 
-        characterAnimator.SetTrigger("Attack");
 
     }
-
-
-
 }

@@ -18,7 +18,7 @@ public class UIController : MonoBehaviour
     private TMP_Text returnText;
     [SerializeField]
     private Image returnImage;
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -66,7 +66,7 @@ public class UIController : MonoBehaviour
         while (Time.unscaledTime <= timeToResume)
         {
             returnImage.fillAmount -= 1.0f / 3 * Time.unscaledDeltaTime;
-            returnText.text = ((int)(timeToResume - Time.unscaledTime)+1).ToString();
+            returnText.text = ((int)(timeToResume - Time.unscaledTime) + 1).ToString();
 
             yield return null;
         }
@@ -81,8 +81,8 @@ public class UIController : MonoBehaviour
         float deathTimer = Time.unscaledTime + 3;
         while (Time.unscaledTime <= deathTimer)
         {
-            Debug.Log(Time.timeScale);
-            if (Time.timeScale >0.1f)
+
+            if (Time.timeScale > 0.1f)
             {
                 Time.timeScale -= 1.0f / 3 * Time.unscaledDeltaTime; ;
             }
@@ -92,7 +92,7 @@ public class UIController : MonoBehaviour
             }
             yield return null;
         }
-        
+
         DeadScreen.SetActive(true);
 
         Time.timeScale = 1;

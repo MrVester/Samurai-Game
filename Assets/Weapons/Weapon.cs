@@ -4,14 +4,22 @@ using UnityEngine;
 public abstract class Weapon : MonoBehaviour
 {
     public float attackCoolDown = 0.25f;
+    public bool isWeaponForCharacter = true;
     public Transform attackPoint;
     public float attackRange = 0.25f;
     public float weaponDamage = 1;
-    public LayerMask enemyLayers;
+    [SerializeField]
+    private LayerMask damagableLayers;
 
     public void Start()
     {
-        enemyLayers = LayerMask.GetMask("EnemySoldier", "EnemyBoss");
+        if (isWeaponForCharacter)
+            damagableLayers = LayerMask.GetMask("EnemySoldier", "EnemyBoss");
+
+        else
+
+            damagableLayers = LayerMask.GetMask("Character");
+
     }
     public void Attack()
     {
@@ -20,20 +28,17 @@ public abstract class Weapon : MonoBehaviour
 
     protected abstract void CallAttack();
 
-
-
     public void DealDamage()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, damagableLayers);
         foreach (Collider2D collider in hitEnemies)
         {
-            collider.gameObject.GetComponent<EnemyHealthController>().TakeDamage(weaponDamage);
+            if (isWeaponForCharacter)
+                collider.gameObject.GetComponent<EnemyHealthController>().TakeDamage(weaponDamage);
+            else
+                collider.gameObject.GetComponent<PlayerHealthController>().TakeDamage(weaponDamage);
+
         }
-    }
-    public IEnumerator DealDamageCoroutine()
-    {
-        yield return new WaitForSeconds(0);
-        DealDamage();
     }
     private void OnDrawGizmos()
     {
