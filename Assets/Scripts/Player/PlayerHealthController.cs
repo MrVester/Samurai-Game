@@ -7,6 +7,7 @@ public class PlayerHealthController : HealthController
 
     private CharacterController characterController;
     private PlayerInputController playerInputController;
+    public HealthBar healthBar;
 
     private new void Start()
     {
@@ -14,6 +15,7 @@ public class PlayerHealthController : HealthController
         base.Start();
         characterController = GetComponentInChildren<CharacterController>();
         playerInputController = GetComponent<PlayerInputController>();
+        healthBar.SetMaxHealth(maxHealth);
         /// CharacterEvents.current.onTakeDamage += TakeDamage;
     }
 
@@ -26,6 +28,7 @@ public class PlayerHealthController : HealthController
         // if hp is less than 0, call PlayerDied event
         if (health <= 0 && !isDead)
         {
+            healthBar.SetHealth(0);
             isDead = true;
             PlayerDied();
         }
@@ -34,7 +37,7 @@ public class PlayerHealthController : HealthController
 
         if (health > 0 && !isDead)
         {
-
+            healthBar.SetHealth(health);
             Debug.Log("Player health: " + health);
         }
     }
