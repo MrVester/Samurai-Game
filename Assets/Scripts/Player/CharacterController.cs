@@ -12,7 +12,7 @@ public class CharacterController : MonoBehaviour
 
 
     private CapsuleCollider2D capsuleCollider2D;
-    private Animator animator;
+    public Animator animator;
     private bool FacingRight = true;
     private bool isCharacterCanWalk = true;
     private bool isInAir = false;
@@ -49,12 +49,12 @@ public class CharacterController : MonoBehaviour
     }
     void Start()
     {
-        
+
         LandParticles = transform.Find("Particles/LandParticle").GetComponent<ParticleSystem>();
         animator = GetComponent<Animator>();
         groundLayerMask = LayerMask.GetMask("Ground");
         capsuleCollider2D = GetComponent<CapsuleCollider2D>();
-        
+
         rb = GetComponent<Rigidbody2D>();
         speed = defaultSpeed;
 
@@ -63,11 +63,11 @@ public class CharacterController : MonoBehaviour
     private void OnValidate()
     {
         speed = defaultSpeed;
-        
+
     }
     private void Update()
     {
-        
+
         SetAnimationsVariables();
         FlipCharacter();
         Jump();
@@ -138,13 +138,13 @@ public class CharacterController : MonoBehaviour
 
         dashTimer = Time.time + CharacterParameters.DashCoolDown;          //ИЗМЕНЕНИЕ ВРЕМЕНИ
 
-            if (dashTimer - lastDash < CharacterParameters.DashCoolDown) //CoolDown for Dash
-            {
-                return;
-            }
-            lastDash = dashTimer;
-            Debug.Log("Dash");
-            StartCoroutine(DashCoroutine());
+        if (dashTimer - lastDash < CharacterParameters.DashCoolDown) //CoolDown for Dash
+        {
+            return;
+        }
+        lastDash = dashTimer;
+        Debug.Log("Dash");
+        StartCoroutine(DashCoroutine());
 
     }
 

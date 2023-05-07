@@ -33,10 +33,8 @@ public abstract class Weapon : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, damagableLayers);
         foreach (Collider2D collider in hitEnemies)
         {
-            if (isWeaponForCharacter)
-                collider.gameObject.GetComponent<EnemyHealthController>().TakeDamage(weaponDamage);
-            else
-                collider.gameObject.GetComponent<PlayerHealthController>().TakeDamage(weaponDamage);
+
+            collider.gameObject.GetComponent<HealthController>().TakeDamage(weaponDamage);
 
         }
     }

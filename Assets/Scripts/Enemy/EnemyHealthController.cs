@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHealthController : MonoBehaviour
+public class EnemyHealthController : HealthController
 {
-    public float MaxHealth = 10.0f;
-    [SerializeField]
-    private float health;
+
+
     private Animator enemyAnimator;
-    private bool isDead = false;
     public float secondsToDestroy = 2f;
-    private void Start()
+
+    private new void Start()
     {
+        base.Start();
         enemyAnimator = GetComponent<Animator>();
-        health = MaxHealth;
+
     }
-    public void TakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
         //BloodParticles.Play();
 

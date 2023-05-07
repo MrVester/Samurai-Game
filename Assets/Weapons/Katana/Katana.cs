@@ -15,6 +15,10 @@ public class Katana : Weapon
 
 
     }
+    public void Awake()
+    {
+
+    }
 
     protected override void CallAttack()
     {

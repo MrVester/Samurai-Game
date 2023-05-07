@@ -98,13 +98,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ec6cfb3923311741ac5db8f225314ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackInterval: 0.25
+  attackCoolDown: 0.5
+  isWeaponForCharacter: 1
   attackPoint: {fileID: 686705012224849039}
   attackRange: 0.62
-  enemyLayers:
+  weaponDamage: 1
+  damagableLayers:
     serializedVersion: 2
     m_Bits: 0
-  katanaAnimator: {fileID: 0}
 --- !u!1 &8626630487576392648
 GameObject:
   m_ObjectHideFlags: 0

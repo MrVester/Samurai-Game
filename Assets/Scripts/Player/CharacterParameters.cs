@@ -9,7 +9,7 @@ public static class CharacterParameters
 
     }
 
-    private static float attackCoolDown = 1f;
+    private static float attackCoolDown = 0.5f;
     public static float AttackCoolDown
     {
         get { return attackCoolDown; }

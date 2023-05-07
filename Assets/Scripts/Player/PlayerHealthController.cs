@@ -1,30 +1,28 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealthController : MonoBehaviour
+public class PlayerHealthController : HealthController
 {
-    public float MaxHealth = 10.0f;
-    [SerializeField]
-    private float health;
+
     private CharacterController characterController;
     private PlayerInputController playerInputController;
-    private bool isDead = false;
-    private void Start()
-    {
-        health = MaxHealth;
 
+    private new void Start()
+    {
+
+        base.Start();
         characterController = GetComponentInChildren<CharacterController>();
         playerInputController = GetComponent<PlayerInputController>();
         /// CharacterEvents.current.onTakeDamage += TakeDamage;
     }
 
-    public void TakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
         //BloodParticles.Play();
 
         // TODO: Add knockback
-
         health -= damage;
-
         // if hp is less than 0, call PlayerDied event
         if (health <= 0 && !isDead)
         {
@@ -47,6 +45,7 @@ public class PlayerHealthController : MonoBehaviour
         characterController.SetJump(false);
         characterController.SetHorizontal(0);
         characterController.SetVertical(0);
+        characterController.animator.SetBool("Dead", true);
         characterController.PlayDeathAnimation();
         // TODO: Died event*/
     }
