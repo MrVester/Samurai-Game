@@ -6,7 +6,7 @@ using UnityEngine;
 public class UIEvents : MonoBehaviour
 {
     public static UIEvents current;
-    void Start()
+    void Awake()
     {
         current = this;
     }
