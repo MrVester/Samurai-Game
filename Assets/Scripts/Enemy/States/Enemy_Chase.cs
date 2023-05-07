@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chase : EnemyBaseFSM
+public class Enemy_Chase : EnemyBaseFSM
 {
-    public float speed = 2.0f;
-    public float attackRange = 2.0f;
+    private float speed;
+    private float attackRange;
     EnemyController enemyController;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
         enemyController = enemy.GetComponent<EnemyController>();
+        speed = enemyController.speed;
+        attackRange = enemy.GetComponent<EnemyWeaponController>().attackRange;
 
     }
 

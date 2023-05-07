@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour
+public class BossAI : MonoBehaviour
 {
     private Animator anim;
     public GameObject player;
-    private Weapon weapon;
-    private float attackCoolDown;
+    public float attackCoolDown = 1f;
+    private float coolDown;
+
     void Start()
     {
         anim = GetComponent<Animator>();
-        weapon = GetComponent<EnemyWeaponController>().GetWeapon();
-        attackCoolDown = 1 / weapon.attackCoolDown;
+
+        coolDown = 1 / attackCoolDown;
 
     }
 
@@ -21,7 +22,7 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
 
-        anim.SetFloat("AttackCoolDown", attackCoolDown);
+        anim.SetFloat("AttackCoolDown", coolDown);
         anim.SetFloat("Distance", Vector3.Distance(transform.position, player.transform.position));
     }
     public GameObject GetPlayer()

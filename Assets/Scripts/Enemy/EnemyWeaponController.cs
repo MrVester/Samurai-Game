@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyWeaponController : MonoBehaviour
 {
+    public float attackRange = 2f;
     public Weapon Weapon;
 
     public void DealDamage()

@@ -9,7 +9,7 @@ public class EnemyHealthController : MonoBehaviour
     private float health;
     private Animator enemyAnimator;
     private bool isDead = false;
-    public float seconds = 2f;
+    public float secondsToDestroy = 2f;
     private void Start()
     {
         enemyAnimator = GetComponent<Animator>();
@@ -42,7 +42,7 @@ public class EnemyHealthController : MonoBehaviour
     {
 
         enemyAnimator.SetTrigger("Dead");
-        StartCoroutine(DestroyEnemy(seconds));
+        StartCoroutine(DestroyEnemy(secondsToDestroy));
 
     }
 

@@ -1,25 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class BossController : MonoBehaviour
 {
     public float speed = 2f;
-    private bool FacingRight = true;
-    private EnemyAI enemyAI;
-
+    private bool FacingRight = false;
+    private BossAI bossAI;
+    private bool isFacingRight = true;
     private void Start()
     {
-        enemyAI = GetComponent<EnemyAI>();
+        bossAI = GetComponent<BossAI>();
     }
     public void LookAtPlayer()
     {
-        Vector3 characterPos = enemyAI.GetPlayer().transform.position;
+        Vector3 characterPos = bossAI.GetPlayer().transform.position;
         if (characterPos.x - transform.position.x < 0 && FacingRight)
 
         {
             Flip();
-
         }
         else
 
@@ -27,9 +27,9 @@ public class EnemyController : MonoBehaviour
 
         {
             Flip();
-
         }
     }
+
     private void Flip()
     {
         FacingRight = !FacingRight;
