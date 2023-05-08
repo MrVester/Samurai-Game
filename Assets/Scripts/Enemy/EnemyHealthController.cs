@@ -8,12 +8,12 @@ public class EnemyHealthController : HealthController
 
     private Animator enemyAnimator;
     public float secondsToDestroy = 2f;
-
+    private DamageFlash _damageFlash;
     private new void Start()
     {
         base.Start();
         enemyAnimator = GetComponent<Animator>();
-
+        _damageFlash = GetComponent<DamageFlash>();
     }
     public override void TakeDamage(float damage)
     {
@@ -21,6 +21,8 @@ public class EnemyHealthController : HealthController
 
         // TODO: Add knockback
         health -= damage;
+
+        _damageFlash.Flash(Color.white);
         // if hp is less than 0, call EnemyDied event
         if (health <= 0 && !isDead)
         {
