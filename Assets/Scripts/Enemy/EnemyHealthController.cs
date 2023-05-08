@@ -22,7 +22,10 @@ public class EnemyHealthController : HealthController
         // TODO: Add knockback
         health -= damage;
 
-        _damageFlash.Flash(Color.white);
+        if (!isDead)
+        {
+            _damageFlash.Flash(Color.white);
+        }
         // if hp is less than 0, call EnemyDied event
         if (health <= 0 && !isDead)
         {
@@ -33,6 +36,7 @@ public class EnemyHealthController : HealthController
         else
         if (health > 0 && !isDead)
         {
+            
             Debug.Log("Enemy health: " + health);
         }
 

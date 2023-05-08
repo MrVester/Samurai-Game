@@ -8,12 +8,14 @@ public class DamageFlash : MonoBehaviour
     private Material flashMaterial;
     [SerializeField] 
     private float duration;
+    private ParticleSystem particle;
     private SpriteRenderer spriteRenderer;
     private Material originalMaterial;
     private Coroutine flashRoutine;
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        particle = GetComponent<ParticleSystem>();
         originalMaterial = spriteRenderer.material;
         flashMaterial = new Material(flashMaterial);
     }
@@ -23,7 +25,10 @@ public class DamageFlash : MonoBehaviour
         {
             StopCoroutine(flashRoutine);
         }
-
+        if (!particle.isPlaying)
+        {
+            particle.Play();
+        }
         flashRoutine = StartCoroutine(FlashRoutine(color));
     }
     private IEnumerator FlashRoutine(Color color)
