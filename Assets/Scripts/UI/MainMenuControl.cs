@@ -34,7 +34,7 @@ public class MainMenuControl : MonoBehaviour
         levelSelector = GetComponent<LevelSelector>();
 
 
-
+        //Если не будет работать, то очищать листенеры с кнопки при возвращении в главное меню и добавлять новый листенер
         playButton.onClick.AddListener(() => PlayButtonEvent(levelsCompleted + 1));
         levelSelectionButton.onClick.AddListener(() => LevelSelectionButtonEvent());
         settingsButton.onClick.AddListener(() => SettingsButtonEvent());
@@ -67,6 +67,7 @@ public class MainMenuControl : MonoBehaviour
     }
     private void BackButtonFromLevelSelectorEvent()
     {
+
         levelSelectorTab.SetActive(false);
         levelSelector.DestroyButtons();
         mainMenuTab.SetActive(true);
