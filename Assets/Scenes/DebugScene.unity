@@ -1849,7 +1849,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25668538, y: 4.73636, z: -10}
+  m_LocalPosition: {x: -0.8059212, y: 4.73869, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1983,7 +1983,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1209011168}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.4466854, y: 0.003639698, z: 0}
+  m_LocalPosition: {x: -0.38407886, y: 0.0013098717, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2464,6 +2464,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3174620268754247693, guid: b7e8d7693ec9e9646b4cb46db1abc054, type: 3}
+      propertyPath: m_Name
+      value: BackGround
+      objectReference: {fileID: 0}
+    - target: {fileID: 3174620269599511302, guid: b7e8d7693ec9e9646b4cb46db1abc054, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3174620269980366527, guid: b7e8d7693ec9e9646b4cb46db1abc054, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8213511989460669771, guid: b7e8d7693ec9e9646b4cb46db1abc054, type: 3}
+      propertyPath: m_Name
+      value: ResumeGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 8213511990076068136, guid: b7e8d7693ec9e9646b4cb46db1abc054, type: 3}
+      propertyPath: m_Name
+      value: ResumeText
+      objectReference: {fileID: 0}
+    - target: {fileID: 8213511990527425874, guid: b7e8d7693ec9e9646b4cb46db1abc054, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8213511990720616961, guid: b7e8d7693ec9e9646b4cb46db1abc054, type: 3}
       propertyPath: m_Name
       value: UI
@@ -2554,6 +2578,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8213511990720616965, guid: b7e8d7693ec9e9646b4cb46db1abc054, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8213511990841069251, guid: b7e8d7693ec9e9646b4cb46db1abc054, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
