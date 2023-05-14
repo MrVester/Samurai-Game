@@ -33,7 +33,7 @@ public class MainMenuControl : MonoBehaviour
 
         levelSelector = GetComponent<LevelSelector>();
 
-
+        //If it is nor working, replace listeners from button after loading main menu, then add new listener to button
         //Если не будет работать, то очищать листенеры с кнопки при возвращении в главное меню и добавлять новый листенер
         playButton.onClick.AddListener(() => PlayButtonEvent(levelsCompleted + 1));
         levelSelectionButton.onClick.AddListener(() => LevelSelectionButtonEvent());
