@@ -413,7 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefixToLvl: Lvl
-  levelStars: 00000000010000000200000003000000000000000000000000000000000000000000000000000000
+  levelStars: 
   levelSelectorGrid: {fileID: 580568678}
   buttonGOPrefab: {fileID: 484255604248234587, guid: 64421150cba7f17449ef44be872f2b3c, type: 3}
 --- !u!4 &283258387
@@ -2049,7 +2049,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: -540
+  m_Spacing: -450
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0

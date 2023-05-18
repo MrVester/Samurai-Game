@@ -5,17 +5,21 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
+
+    void OnEnable()
+    {
+        if (instance != null && instance != this) 
+        { 
+            Destroy(this); 
+        } 
+        else 
+        { 
+            instance = this; 
+        } 
+    }
+
     void Start()
     {
-        if (instance == null)
-        {
-	        instance = this;
-	    } 
-        else if(instance == this)
-        {
-	        Destroy(gameObject);
-        }
-
         DontDestroyOnLoad(gameObject);
 
 	    InitGameManager();
@@ -25,4 +29,5 @@ public class GameManager : MonoBehaviour
     {
         JSONSave.Start(JSONSaveConfig.GetConfig());
     }
+
 }

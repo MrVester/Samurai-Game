@@ -15,6 +15,7 @@ public class MenuButton : MonoBehaviour
 
     private void MenuButtonRelease()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
     }
 

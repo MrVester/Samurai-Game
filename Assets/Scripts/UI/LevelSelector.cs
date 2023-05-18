@@ -10,7 +10,7 @@ public class LevelSelector : MonoBehaviour
 {
     [Header("LevelSelector")]
     public string prefixToLvl;
-    public int[] levelStars;
+    public List<int> levelStars = new List<int>();
     public GameObject levelSelectorGrid;
     public GameObject buttonGOPrefab;
     private TextMeshProUGUI buttonTextMeshPro;
@@ -52,7 +52,10 @@ public class LevelSelector : MonoBehaviour
 
     }
 
-
+    public void SetLevelStars(int stars)
+    {
+        this.levelStars.Add(stars);
+    }
 
     void LoadLevel(int level)
     {

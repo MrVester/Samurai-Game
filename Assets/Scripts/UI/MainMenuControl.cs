@@ -25,16 +25,16 @@ public class MainMenuControl : MonoBehaviour
     public Button settingsButton;
     public Button quitButton;
 
-
-
-
     void Start()
     {
-
+        JSONSave.Start(JSONSaveConfig.GetConfig());
+        
         levelSelector = GetComponent<LevelSelector>();
+        
+        FirstTimeCheck();
 
         //If it is nor working, replace listeners from button after loading main menu, then add new listener to button
-        //Если не будет работать, то очищать листенеры с кнопки при возвращении в главное меню и добавлять новый листенер
+        //пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         playButton.onClick.AddListener(() => PlayButtonEvent(levelsCompleted + 1));
         levelSelectionButton.onClick.AddListener(() => LevelSelectionButtonEvent());
         settingsButton.onClick.AddListener(() => SettingsButtonEvent());
@@ -42,6 +42,7 @@ public class MainMenuControl : MonoBehaviour
 
         backButtonFromLevelSelector.onClick.AddListener(() => BackButtonFromLevelSelectorEvent());
         backButtonFromSettings.onClick.AddListener(() => BackButtonFromSettingsEvent());
+        
     }
 
 
@@ -98,5 +99,31 @@ public class MainMenuControl : MonoBehaviour
             }
         }
         return null;
+    }
+
+    /// <summary>
+    /// Check if it is the first time the game is run
+    /// </summary>
+    public void FirstTimeCheck()
+    {
+        if (!JSONSave.HasKeyForBool("isFirstTime"))
+        {
+            JSONSave.SetBool("isFirstTime", false);
+            // init initial values
+            JSONSave.SetInt("levelsAmount", levelsAmount);
+            for (int i = 0; i < levelsAmount; i++)
+            {
+                JSONSave.SetInt("level" + (i + 1) + "Stars", 0);
+            }
+            JSONSave.SetInt("levelsCompleted", 0);
+            JSONSave.SetInt("currentLevel", 1);
+        }
+        // load values
+        levelsAmount = JSONSave.GetInt("levelsAmount");
+        levelsCompleted = JSONSave.GetInt("levelsCompleted");
+        for (int i = 0; i < levelsAmount; i++)
+        {
+            levelSelector.SetLevelStars(JSONSave.GetInt("level" + (i + 1) + "Stars"));
+        }
     }
 }
