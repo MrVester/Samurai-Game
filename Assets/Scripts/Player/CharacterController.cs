@@ -18,11 +18,9 @@ public class CharacterController : MonoBehaviour
     private bool isInAir = false;
     [Header("Movement")]
     public float maxCharacterSpeed = 6f;
-    public float defaultSpeed = 1f;
-    private float speed;
     private Vector2 joystickInput;
 
-    [Header("Jumping")]
+    [Header("Jump")]
     private ParticleSystem LandParticles;
     private bool jump;
     public float JumpForce = 5f;
@@ -64,15 +62,10 @@ public class CharacterController : MonoBehaviour
         capsuleCollider2D = GetComponent<CapsuleCollider2D>();
 
         rb = GetComponent<Rigidbody2D>();
-        speed = defaultSpeed;
 
         CharacterEvents.current.onDash += DashPlayer;
     }
-    private void OnValidate()
-    {
-        speed = defaultSpeed;
 
-    }
     private void Update()
     {
 
