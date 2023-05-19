@@ -16,14 +16,18 @@ public class CharacterController : MonoBehaviour
     private bool FacingRight = true;
     private bool isCharacterCanWalk = true;
     private bool isInAir = false;
+
     [Header("Movement")]
-    public float maxCharacterSpeed = 6f;
+    [SerializeField]
+    private float maxCharacterSpeed = 6f;
     private Vector2 joystickInput;
 
     [Header("Jump")]
+    [SerializeField]
+    private float JumpForce = 5f;
     private ParticleSystem LandParticles;
     private bool jump;
-    public float JumpForce = 5f;
+
 
     [Header("Dash")]
     [SerializeField]
