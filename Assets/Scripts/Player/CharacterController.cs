@@ -28,6 +28,12 @@ public class CharacterController : MonoBehaviour
     public float JumpForce = 5f;
 
     [Header("Dash")]
+    [SerializeField]
+    private float dashCoolDown = 2f;
+    [SerializeField]
+    private float dashSpeed = 20f;
+    [SerializeField]
+    private float dashTime = 0.1f;
     private float lastDash;
     private float dashTimer;
 
@@ -49,7 +55,9 @@ public class CharacterController : MonoBehaviour
     }
     void Start()
     {
-
+        CharacterParameters.DashCoolDown = dashCoolDown;
+        CharacterParameters.DashSpeed = dashSpeed;
+        CharacterParameters.DashTime = dashTime;
         LandParticles = transform.Find("Particles/LandParticle").GetComponent<ParticleSystem>();
         animator = GetComponent<Animator>();
         groundLayerMask = LayerMask.GetMask("Ground");
