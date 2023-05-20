@@ -8,7 +8,7 @@ public class PlayerHealthController : HealthController
     private CharacterController characterController;
     private PlayerInputController playerInputController;
     public HealthBar healthBar;
-
+    private DamageFlash _damageFlash;
     private new void Start()
     {
 
@@ -16,6 +16,7 @@ public class PlayerHealthController : HealthController
         characterController = GetComponentInChildren<CharacterController>();
         playerInputController = GetComponent<PlayerInputController>();
         healthBar.SetMaxHealth(maxHealth);
+        _damageFlash = GetComponent<DamageFlash>();
         /// CharacterEvents.current.onTakeDamage += TakeDamage;
     }
 
@@ -30,7 +31,10 @@ public class PlayerHealthController : HealthController
 
         if (!isDead)
         {
-            //   _damageFlash.Flash(Color.white);
+            if (!isDead)
+            {
+                _damageFlash.Flash(Color.white);
+            }
         }
         if (health <= 0 && !isDead)
         {

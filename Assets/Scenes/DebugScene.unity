@@ -2071,10 +2071,6 @@ PrefabInstance:
       propertyPath: variableJoystick
       value: 
       objectReference: {fileID: 1534949215}
-    - target: {fileID: 146421127305214349, guid: c4eef732e2741fb47a976f446695a913, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 146421127305214352, guid: c4eef732e2741fb47a976f446695a913, type: 3}
       propertyPath: m_RootOrder
       value: 10
