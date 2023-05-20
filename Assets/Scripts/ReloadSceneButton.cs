@@ -15,6 +15,8 @@ public class ReloadSceneButton : MonoBehaviour
 
     private void MenuButtonRelease()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+        
     }
 }
