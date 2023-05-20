@@ -12,7 +12,7 @@ public class CharacterController : MonoBehaviour
 
 
     private CapsuleCollider2D capsuleCollider2D;
-    public Animator animator;
+    private Animator animator;
     private bool FacingRight = true;
     private bool isCharacterCanWalk = true;
     private bool isInAir = false;
@@ -266,8 +266,10 @@ public class CharacterController : MonoBehaviour
         transform.localScale = theScale;
 
     }
+
     public void PlayDeathAnimation()
     {
+        animator.SetBool("Dead", true);
         animator.Play("MC_Dead");
     }
 

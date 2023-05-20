@@ -6,16 +6,15 @@ using UnityEngine;
 public class BossAI : MonoBehaviour
 {
     private Animator anim;
-    public GameObject player;
+    private GameObject player;
     public float attackCoolDown = 1f;
     private float coolDown;
 
     void Start()
     {
         anim = GetComponent<Animator>();
-
         coolDown = 1 / attackCoolDown;
-
+        player = FindObjectOfType<CharacterController>().gameObject;
     }
 
     // Update is called once per frame

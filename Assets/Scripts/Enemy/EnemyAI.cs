@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     private Animator anim;
-    public GameObject player;
+    private GameObject player;
     private Weapon weapon;
     private float attackCoolDown;
     void Start()
@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour
         anim = GetComponent<Animator>();
         weapon = GetComponent<EnemyWeaponController>().GetWeapon();
         attackCoolDown = 1 / weapon.attackCoolDown;
+        player = FindObjectOfType<CharacterController>().gameObject;
 
     }
 

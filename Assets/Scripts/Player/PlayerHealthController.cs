@@ -26,6 +26,12 @@ public class PlayerHealthController : HealthController
         // TODO: Add knockback
         health -= damage;
         // if hp is less than 0, call PlayerDied event
+
+
+        if (!isDead)
+        {
+            //   _damageFlash.Flash(Color.white);
+        }
         if (health <= 0 && !isDead)
         {
             healthBar.SetHealth(0);
@@ -48,7 +54,7 @@ public class PlayerHealthController : HealthController
         characterController.SetJump(false);
         characterController.SetHorizontal(0);
         characterController.SetVertical(0);
-        characterController.animator.SetBool("Dead", true);
+        // characterController.animator.SetBool("Dead", true);
         characterController.PlayDeathAnimation();
         // TODO: Died event*/
     }

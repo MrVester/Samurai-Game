@@ -36,7 +36,8 @@ public class EnemyHealthController : HealthController
         else
         if (health > 0 && !isDead)
         {
-            
+
+
             Debug.Log("Enemy health: " + health);
         }
 
@@ -56,5 +57,7 @@ public class EnemyHealthController : HealthController
     {
         yield return new WaitForSeconds(seconds);
         Destroy(gameObject);
+        EnemiesCounter.current.DecrementEnemiesAmount();
+        yield return null;
     }
 }
