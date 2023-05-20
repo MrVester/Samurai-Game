@@ -2,18 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHealthController : HealthController
+public class BossHealthController : EnemyHealthController
 {
+    public HealthBar bossHPBar;
 
-
-    protected Animator enemyAnimator;
-    public float secondsToDestroy = 2f;
-    protected DamageFlash _damageFlash;
-    protected void Start()
+    private new void Start()
     {
         base.Start();
-        enemyAnimator = GetComponent<Animator>();
-        _damageFlash = GetComponent<DamageFlash>();
+        bossHPBar.SetMaxHealth(maxHealth);
     }
     public override void TakeDamage(float damage)
     {
@@ -33,16 +29,20 @@ public class EnemyHealthController : HealthController
         // if hp is less than 0, call EnemyDied event
         if (health <= 0 && !isDead)
         {
+            bossHPBar.SetHealth(0);
             isDead = true;
             Debug.Log(isDead);
             EnemyDied();
         }
+
         else
+
         if (health > 0 && !isDead)
         {
+            bossHPBar.SetHealth(health);
+
             Debug.Log("Enemy health: " + health);
         }
-
 
 
 
@@ -50,7 +50,6 @@ public class EnemyHealthController : HealthController
     // Update is called once per frame
     private void EnemyDied()
     {
-
         enemyAnimator.SetTrigger("Dead");
         StartCoroutine(DestroyEnemy(secondsToDestroy));
 
@@ -61,6 +60,7 @@ public class EnemyHealthController : HealthController
         yield return new WaitForSeconds(seconds);
         Destroy(gameObject);
         EnemiesCounter.current.DecrementEnemiesAmount();
+        bossHPBar.gameObject.SetActive(false);
         yield return null;
     }
 }

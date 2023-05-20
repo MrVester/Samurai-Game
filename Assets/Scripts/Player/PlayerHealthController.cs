@@ -31,10 +31,13 @@ public class PlayerHealthController : HealthController
 
         if (!isDead)
         {
-            if (!isDead)
-            {
-                _damageFlash.Flash(Color.white);
-            }
+
+            _damageFlash.Flash(Color.white);
+
+        }
+        else
+        {
+            health = 0;
         }
         if (health <= 0 && !isDead)
         {

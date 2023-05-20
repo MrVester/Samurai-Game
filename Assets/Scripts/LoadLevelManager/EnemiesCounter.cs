@@ -20,10 +20,6 @@ public class EnemiesCounter : MonoBehaviour
 
         enemiesAmount = FindObjectsOfType<EnemyHealthController>().Length;
     }
-    private void Update()
-    {
-        Debug.Log("Enemies amount: " + enemiesAmount);
-    }
 
     public int CountEnemies()
     {
