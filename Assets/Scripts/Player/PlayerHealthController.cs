@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class PlayerHealthController : HealthController
     private PlayerInputController playerInputController;
     public HealthBar healthBar;
     private DamageFlash _damageFlash;
+
     private new void Start()
     {
 
@@ -31,7 +33,7 @@ public class PlayerHealthController : HealthController
 
         if (!isDead)
         {
-
+            AudioController.current.PlayHitSound();
             _damageFlash.Flash(Color.white);
 
         }
@@ -50,6 +52,7 @@ public class PlayerHealthController : HealthController
 
         if (health > 0 && !isDead)
         {
+
             healthBar.SetHealth(health);
             Debug.Log("Player health: " + health);
         }

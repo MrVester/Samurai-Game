@@ -25,6 +25,7 @@ public class Katana : Weapon
     {
 
         // Attack enemy
+        AudioController.current.PlayPlayerAttackSound();
         Debug.Log("Attack");
 
         characterAnimator.SetTrigger("Attack");

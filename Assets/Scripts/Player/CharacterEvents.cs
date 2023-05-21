@@ -22,8 +22,19 @@ public class CharacterEvents : MonoBehaviour
         if (onDeath != null)
             onDeath();
     }
+
+    public event Action onDeathScreenShown;
+    public void DeathScreenShown()
+    {
+        if (onDeathScreenShown != null)
+        {
+            onDeathScreenShown();
+        }
+
+    }
+
     public event Action onAttack;
-    public void Attack() 
+    public void Attack()
     {
         if (onAttack != null)
             onAttack();
@@ -35,7 +46,7 @@ public class CharacterEvents : MonoBehaviour
         {
             onDash();
         }
-            
+
     }
 
 }

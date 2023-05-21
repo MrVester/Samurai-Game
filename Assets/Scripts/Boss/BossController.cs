@@ -11,6 +11,7 @@ public class BossController : MonoBehaviour
     private bool isFacingRight = true;
     private void Start()
     {
+        CharacterEvents.current.onDeathScreenShown += DisactivateObject;
         bossAI = GetComponent<BossAI>();
     }
     public void LookAtPlayer()
@@ -37,6 +38,10 @@ public class BossController : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
 
+    }
+    private void DisactivateObject()
+    {
+        gameObject.SetActive(false);
     }
 
 }

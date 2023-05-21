@@ -24,6 +24,7 @@ public class EnemyHealthController : HealthController
 
         if (!isDead)
         {
+            AudioController.current.PlayHitSound();
             _damageFlash.Flash(Color.white);
         }
         else
@@ -40,6 +41,7 @@ public class EnemyHealthController : HealthController
         else
         if (health > 0 && !isDead)
         {
+
             Debug.Log("Enemy health: " + health);
         }
 

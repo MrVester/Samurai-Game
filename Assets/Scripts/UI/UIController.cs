@@ -91,7 +91,7 @@ public class UIController : MonoBehaviour
             }
             yield return null;
         }
-
+        CharacterEvents.current.DeathScreenShown();
         DeadScreen.SetActive(true);
 
         Time.timeScale = 1;

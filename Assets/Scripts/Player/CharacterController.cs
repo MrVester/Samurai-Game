@@ -21,6 +21,7 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private float maxCharacterSpeed = 6f;
     private Vector2 joystickInput;
+    private bool isPlayerStepsPlaying = false;
 
     [Header("Jump")]
     [SerializeField]
@@ -125,6 +126,20 @@ public class CharacterController : MonoBehaviour
     void Walk()
     {
         rb.velocity = new Vector2(joystickInput.x * maxCharacterSpeed, rb.velocity.y);
+
+
+        //Отключать звуки ходьбы при паузе
+        if (rb.velocity.x != 0 && isOnGround() && !isPlayerStepsPlaying)
+        {
+            isPlayerStepsPlaying = true;
+            AudioController.current.PlayPlayerStepsSound();
+        }
+        else
+        if (rb.velocity.x == 0 || !isOnGround())
+        {
+            isPlayerStepsPlaying = false;
+            AudioController.current.StopPlayerStepsSound();
+        }
     }
     void Jump()
     {

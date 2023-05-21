@@ -20,6 +20,7 @@ public class BossWeapon : MonoBehaviour
     }
     public void Attack()
     {
+        AudioController.current.PlayBossAttackSound();
         Vector3 pos = transform.position;
         pos += transform.right * attackOffset.x * FacingVectorX();
         pos += transform.up * attackOffset.y;

@@ -16,10 +16,16 @@ public class EnemySaber : Weapon
 
     }
 
+    public override void DealDamage()
+    {
+        base.DealDamage();
+        CallAttack();
+    }
     protected override void CallAttack()
     {
 
         // Attack enemy
+        AudioController.current.PlayEnemyAttackSound();
         Debug.Log("Enemy Attack");
 
 

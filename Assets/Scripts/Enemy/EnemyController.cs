@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+        CharacterEvents.current.onDeathScreenShown += DisactivateObject;
         enemyAI = GetComponent<EnemyAI>();
     }
     public void LookAtPlayer()
@@ -37,6 +38,10 @@ public class EnemyController : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
 
+    }
+    private void DisactivateObject()
+    {
+        gameObject.SetActive(false);
     }
 
 }

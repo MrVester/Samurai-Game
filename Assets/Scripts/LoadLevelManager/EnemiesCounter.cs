@@ -21,7 +21,7 @@ public class EnemiesCounter : MonoBehaviour
     {
         enemiesAmount = FindObjectsOfType<EnemyHealthController>().Length;
         Debug.Log("EnemiesAmount: " + enemiesAmount);
-        if (enemiesAmount != 0)
+        if (enemiesAmount > 0)
             onEnemiesAlive();
 
     }

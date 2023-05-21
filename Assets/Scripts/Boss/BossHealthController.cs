@@ -20,6 +20,7 @@ public class BossHealthController : EnemyHealthController
 
         if (!isDead)
         {
+            AudioController.current.PlayHitSound();
             _damageFlash.Flash(Color.white);
         }
         else
@@ -39,6 +40,7 @@ public class BossHealthController : EnemyHealthController
 
         if (health > 0 && !isDead)
         {
+
             bossHPBar.SetHealth(health);
 
             Debug.Log("Enemy health: " + health);

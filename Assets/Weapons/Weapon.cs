@@ -28,7 +28,7 @@ public abstract class Weapon : MonoBehaviour
 
     protected abstract void CallAttack();
 
-    public void DealDamage()
+    public virtual void DealDamage()
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, damagableLayers);
         foreach (Collider2D collider in hitEnemies)
