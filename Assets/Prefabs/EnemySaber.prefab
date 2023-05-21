@@ -81,7 +81,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6628409440761376094, guid: 3a94a56fa54cf18438f7999faec2fc4a, type: 3}
       propertyPath: weaponDamage
-      value: 2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6628409440761376094, guid: 3a94a56fa54cf18438f7999faec2fc4a, type: 3}
       propertyPath: attackCoolDown

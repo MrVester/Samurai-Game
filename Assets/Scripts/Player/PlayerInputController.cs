@@ -23,6 +23,7 @@ public class PlayerInputController : MonoBehaviour
         }
         else
         {
+            Application.targetFrameRate = 100;
             Debug.Log("Platform" + Application.platform + " is supported.");
         }
 

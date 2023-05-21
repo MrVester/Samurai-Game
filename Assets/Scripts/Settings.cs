@@ -7,7 +7,7 @@ using TMPro;
 
 public class Settings : MonoBehaviour
 {
-    private AudioSource audioSrc;
+    public AudioSource audioSrc;
 
     public Toggle toggleVolume;
     public Slider slider;
@@ -18,12 +18,11 @@ public class Settings : MonoBehaviour
         JSONSave.Start(JSONSaveConfig.GetConfig());
         toggleVolume.onValueChanged.AddListener((value) => SetVolumeZero());
         slider.onValueChanged.AddListener((value) => SetVolume());
-        audioSrc = GetComponent<AudioSource>();
+        //audioSrc = GetComponent<AudioSource>();
         if (JSONSave.HasKey("SaveVolume"))
         {
             slider.value = audioSrc.volume = JSONSave.GetFloat("SaveVolume");
         }
-
         else
         {
             slider.value = audioSrc.volume = 0.2f;

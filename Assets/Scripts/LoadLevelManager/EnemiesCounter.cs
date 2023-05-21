@@ -7,6 +7,7 @@ public class EnemiesCounter : MonoBehaviour
 {
     public static EnemiesCounter current;
     public event Action onAllEnemiesDead;
+    public event Action onEnemiesAlive;
     private int enemiesAmount;
 
 
@@ -20,8 +21,8 @@ public class EnemiesCounter : MonoBehaviour
     {
         enemiesAmount = FindObjectsOfType<EnemyHealthController>().Length;
         Debug.Log("EnemiesAmount: " + enemiesAmount);
-        if (enemiesAmount == 0)
-            onAllEnemiesDead();
+        if (enemiesAmount != 0)
+            onEnemiesAlive();
 
     }
 

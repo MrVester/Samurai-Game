@@ -3136,6 +3136,7 @@ GameObject:
   - component: {fileID: 8213511990720616960}
   - component: {fileID: 8213511990720616967}
   - component: {fileID: 8213511990720616964}
+  - component: {fileID: 4225367271515837366}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -3257,6 +3258,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de52063890380d42925d50b1ba52f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4225367271515837366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8213511990720616961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff9e540057955f44ae1b2bdaa0d4ce7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSrc: {fileID: 0}
+  toggleVolume: {fileID: 3174620270178928273}
+  slider: {fileID: 3174620270413692560}
+  soundValue: {fileID: 3174620269011671371}
 --- !u!1 &8213511990788195534
 GameObject:
   m_ObjectHideFlags: 0

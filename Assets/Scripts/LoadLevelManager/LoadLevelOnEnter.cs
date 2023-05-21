@@ -20,9 +20,9 @@ public class LoadLevelOnEnter : MonoBehaviour
     {
         collider = GetComponent<Collider2D>();
         arrow = GetComponent<SpriteRenderer>();
-        collider.enabled = false;
-        arrow.enabled = false;
+        ActivateCollider();
         EnemiesCounter.current.onAllEnemiesDead += ActivateCollider;
+        EnemiesCounter.current.onEnemiesAlive += DisableCollider;
     }
     void Start()
     {
@@ -44,6 +44,11 @@ public class LoadLevelOnEnter : MonoBehaviour
     {
         collider.enabled = true;
         arrow.enabled = true;
+    }
+    private void DisableCollider()
+    {
+        collider.enabled = false;
+        arrow.enabled = false;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
