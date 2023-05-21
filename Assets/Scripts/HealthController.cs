@@ -15,4 +15,9 @@ public abstract class HealthController : MonoBehaviour
     }
 
     public abstract void TakeDamage(float damage);
+    public virtual void Kill()
+    {
+        health = 0;
+        isDead = true;
+    }
 }

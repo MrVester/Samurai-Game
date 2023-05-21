@@ -59,11 +59,10 @@ public class PlayerHealthController : HealthController
         }
     }
 
-    public void KillCharacter()
+    public override void Kill()
     {
-        health = 0;
+        base.Kill();
         healthBar.SetHealth(0);
-        isDead = true;
         PlayerDied();
     }
     private void PlayerDied()

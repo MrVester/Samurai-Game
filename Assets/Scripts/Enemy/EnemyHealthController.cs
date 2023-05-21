@@ -35,7 +35,6 @@ public class EnemyHealthController : HealthController
         if (health <= 0 && !isDead)
         {
             isDead = true;
-            Debug.Log(isDead);
             EnemyDied();
         }
         else
@@ -48,6 +47,11 @@ public class EnemyHealthController : HealthController
 
 
 
+    }
+    public override void Kill()
+    {
+        base.Kill();
+        EnemyDied();
     }
     // Update is called once per frame
     private void EnemyDied()
