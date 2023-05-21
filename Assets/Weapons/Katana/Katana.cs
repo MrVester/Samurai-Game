@@ -12,13 +12,13 @@ public class Katana : Weapon
 
         base.Start();
         characterAnimator = transform.root.GetComponent<Animator>();
-        CharacterParameters.AttackCoolDown = attackCoolDown;
+
 
     }
     public void Awake()
     {
 
-
+        CharacterParameters.AttackCoolDown = attackCoolDown;
     }
 
     protected override void CallAttack()

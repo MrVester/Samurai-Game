@@ -22,9 +22,9 @@ public class Enemy_Chase : EnemyBaseFSM
     {
         enemyController.LookAtPlayer();
         Vector2 target = new Vector2(player.transform.position.x, rb.position.y);
-        Vector2 newpos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
+
         if (animator.GetFloat("Distance") > attackRange)
-            rb.MovePosition(newpos);
+            rb.velocity = new Vector2(speed * enemyController.facingVector, rb.velocity.y);
 
         if (animator.GetFloat("Distance") <= attackRange)
         {

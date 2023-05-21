@@ -11,6 +11,7 @@ public class LoadLevelOnEnter : MonoBehaviour
     public float timeFor3Stars;
     public float timeFor2Stars;
     public float timeFor1Star;
+    [SerializeField]
     private float timer;
     private EnemiesCounter enemiesCounter;
     private Collider2D collider;

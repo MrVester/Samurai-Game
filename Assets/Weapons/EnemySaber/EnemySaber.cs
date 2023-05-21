@@ -10,7 +10,6 @@ public class EnemySaber : Weapon
     {
         base.Start();
         enemyAnimator = transform.root.GetComponent<Animator>();
-        CharacterParameters.AttackCoolDown = attackCoolDown;
         //characterController = GetComponentInParent<CharacterController>();
 
 

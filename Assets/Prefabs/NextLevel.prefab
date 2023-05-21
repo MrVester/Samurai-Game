@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e47c9c7a5268d7141b7ceb9d3eefaa23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: 2
+  nextLevel: 1
   timeFor3Stars: 5
   timeFor2Stars: 10
   timeFor1Star: 15

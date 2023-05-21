@@ -43,6 +43,7 @@ public class PlayerHealthController : HealthController
         }
         if (health <= 0 && !isDead)
         {
+            health = 0;
             healthBar.SetHealth(0);
             isDead = true;
             PlayerDied();
@@ -56,6 +57,14 @@ public class PlayerHealthController : HealthController
             healthBar.SetHealth(health);
             Debug.Log("Player health: " + health);
         }
+    }
+
+    public void KillCharacter()
+    {
+        health = 0;
+        healthBar.SetHealth(0);
+        isDead = true;
+        PlayerDied();
     }
     private void PlayerDied()
     {

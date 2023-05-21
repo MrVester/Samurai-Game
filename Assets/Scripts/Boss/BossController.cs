@@ -43,5 +43,8 @@ public class BossController : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-
+    private void OnDestroy()
+    {
+        CharacterEvents.current.onDeathScreenShown -= DisactivateObject;
+    }
 }
