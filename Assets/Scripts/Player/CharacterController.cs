@@ -128,7 +128,7 @@ public class CharacterController : MonoBehaviour
         rb.velocity = new Vector2(joystickInput.x * maxCharacterSpeed, rb.velocity.y);
 
 
-        //Отключать звуки ходьбы при паузе
+        //Disable PlayerSteps on Pause
         if (rb.velocity.x != 0 && isOnGround() && !isPlayerStepsPlaying)
         {
             isPlayerStepsPlaying = true;
