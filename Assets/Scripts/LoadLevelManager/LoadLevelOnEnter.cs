@@ -16,17 +16,23 @@ public class LoadLevelOnEnter : MonoBehaviour
     private Collider2D collider;
     private SpriteRenderer arrow;
 
-    void Start()
+    private void Awake()
     {
-
-        timer = 0;
-        EnemiesCounter.current.onAllEnemiesDead += ActivateCollider;
-        JSONSave.Start(JSONSaveConfig.GetConfig());
-        enemiesCounter = GetComponent<EnemiesCounter>();
         collider = GetComponent<Collider2D>();
         arrow = GetComponent<SpriteRenderer>();
         collider.enabled = false;
         arrow.enabled = false;
+        EnemiesCounter.current.onAllEnemiesDead += ActivateCollider;
+    }
+    void Start()
+    {
+
+        timer = 0;
+
+        JSONSave.Start(JSONSaveConfig.GetConfig());
+        enemiesCounter = GetComponent<EnemiesCounter>();
+
+
     }
 
     private void Update()

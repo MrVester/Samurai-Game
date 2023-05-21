@@ -13,12 +13,16 @@ public class EnemiesCounter : MonoBehaviour
     private void Awake()
     {
         current = this;
+
     }
 
     void Start()
     {
-
         enemiesAmount = FindObjectsOfType<EnemyHealthController>().Length;
+        Debug.Log("EnemiesAmount: " + enemiesAmount);
+        if (enemiesAmount == 0)
+            onAllEnemiesDead();
+
     }
 
     public int CountEnemies()
@@ -28,12 +32,15 @@ public class EnemiesCounter : MonoBehaviour
 
     public void DecrementEnemiesAmount()
     {
-        Debug.Log("Updated");
+        Debug.Log("EnemiesAmount: " + enemiesAmount);
         enemiesAmount--;
         if (enemiesAmount <= 0)
         {
+            enemiesAmount = 0;
             onAllEnemiesDead();
         }
+
+
     }
 
 
