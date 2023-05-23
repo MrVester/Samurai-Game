@@ -133,7 +133,7 @@ PrefabInstance:
     - target: {fileID: 2395325458145869346, guid: e2cc77c922ffb344e8a8bfdfe94ced0b, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 46d44753bd06ed54f9583c5a13a234f1, type: 3}
+      objectReference: {fileID: 8300000, guid: 5adddd96128e3fb4eaa4f5fcaea77329, type: 3}
     - target: {fileID: 2395325458145869347, guid: e2cc77c922ffb344e8a8bfdfe94ced0b, type: 3}
       propertyPath: m_Name
       value: AudioSource
@@ -185,7 +185,7 @@ PrefabInstance:
     - target: {fileID: 2395325458145869350, guid: e2cc77c922ffb344e8a8bfdfe94ced0b, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 5adddd96128e3fb4eaa4f5fcaea77329, type: 3}
+      objectReference: {fileID: 8300000, guid: 231ee6d922516324ba7636fce493c85f, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2cc77c922ffb344e8a8bfdfe94ced0b, type: 3}
 --- !u!82 &45178904 stripped
@@ -433,7 +433,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 366479512}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.95592785, y: 0.14840996, z: -10}
+  m_LocalPosition: {x: -2.7224886, y: 0.14607, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -442,6 +442,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &611854045 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 146421127305214352, guid: c4eef732e2741fb47a976f446695a913, type: 3}
+  m_PrefabInstance: {fileID: 1351098046}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &883402457
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1179,7 +1184,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1723759635}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.704072, y: -1.5584099, z: 0}
+  m_LocalPosition: {x: -2.9575112, y: -1.24607, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1221,7 +1226,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_Follow: {fileID: 611854045}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
@@ -3442,7 +3447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6759995432955064284, guid: d75f64be040b2e140ad6498cdd1cc568, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.344963
+      value: 18.81
       objectReference: {fileID: 0}
     - target: {fileID: 6759995432955064284, guid: d75f64be040b2e140ad6498cdd1cc568, type: 3}
       propertyPath: m_LocalPosition.y
