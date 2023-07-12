@@ -227,7 +227,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 82433451}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.704072, y: -1.5584099, z: 0}
+  m_LocalPosition: {x: -1.3392186, y: -1.55395, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -473,7 +473,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 373808340}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.95592785, y: 0.14840996, z: -10}
+  m_LocalPosition: {x: -4.320781, y: 0.14394999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1522,11 +1522,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 1}
-      - {x: -19.862526, y: 0.9290831}
+    - - {x: -19.950186, y: -1.4848354}
       - {x: -19.929419, y: -11.503486}
-      - {x: 12.359917, y: -11.460859}
-      - {x: 12.353695, y: 0.98626935}
+      - {x: 12.686741, y: -11.4955435}
+      - {x: 12.665176, y: -1.4641391}
 --- !u!4 &1090847124
 Transform:
   m_ObjectHideFlags: 0
